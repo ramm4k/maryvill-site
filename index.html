@@ -1,0 +1,2938 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Маривилл — гостевые дома у Волги</title>
+<style>
+
+:root {
+  --green:#173827;
+  --green-dark:#0f261b;
+  --green-soft:#e8f0ea;
+  --cream:#f5efe5;
+  --cream2:#fbf8f3;
+  --white:#ffffff;
+  --brown:#9a6a35;
+  --brown-soft:#efe2cf;
+  --text:#1f2a24;
+  --muted:#647067;
+  --line:rgba(31,42,36,.12);
+  --shadow:0 18px 45px rgba(20,35,26,.10);
+  --shadow-soft:0 10px 26px rgba(20,35,26,.08);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: Arial, sans-serif;
+  background:var(--cream);
+  color:var(--text);
+  line-height:1.6;
+}
+a { color:inherit; text-decoration:none; }
+.container { width:min(1180px,92%); margin:0 auto; }
+
+/* Header */
+.header {
+  position:fixed;
+  top:16px;
+  left:0;
+  width:100%;
+  z-index:50;
+  background:transparent;
+}
+.header-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  padding:10px 12px 10px 16px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(31,42,36,.10);
+  border-radius:24px;
+  box-shadow:0 16px 46px rgba(20,35,26,.12);
+  backdrop-filter:blur(14px);
+}
+.logo {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+  font-size:23px;
+  color:var(--green);
+  white-space:nowrap;
+}
+.logo img {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.nav {
+  display:flex;
+  gap:6px;
+  font-size:14px;
+  font-weight:800;
+  color:#31443a;
+  padding:5px;
+  border-radius:18px;
+  background:var(--green-soft);
+  border:1px solid rgba(23,56,39,.08);
+}
+.nav a {
+  padding:10px 14px;
+  border-radius:14px;
+  transition:.18s;
+  white-space:nowrap;
+}
+.nav a:hover {
+  background:var(--white);
+  color:var(--green);
+  box-shadow:0 6px 16px rgba(20,35,26,.08);
+}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 21px;
+  border-radius:16px;
+  background:var(--green);
+  color:white;
+  font-weight:900;
+  transition:.2s;
+  box-shadow:0 12px 26px rgba(23,56,39,.18);
+}
+.btn:hover {
+  transform:translateY(-2px);
+  background:var(--green-dark);
+}
+.btn-light {
+  background:white;
+  color:var(--green);
+  box-shadow:0 12px 26px rgba(255,255,255,.16);
+}
+.btn-vk { background:#2677d9; }
+.btn-wa { background:#1f8f4d; }
+
+/* Hero */
+.hero {
+  min-height:94vh;
+  padding-top:104px;
+  display:flex;
+  align-items:center;
+  color:white;
+  background:
+    linear-gradient(90deg,rgba(11,29,20,.78),rgba(11,29,20,.42),rgba(11,29,20,.08)),
+    url('assets/hero.jpg') center/cover;
+}
+.hero-content {
+  max-width:780px;
+  padding:96px 0 86px;
+}
+.eyebrow {
+  display:inline-flex;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.24);
+  font-size:14px;
+  font-weight:900;
+  margin-bottom:18px;
+}
+.hero h1 {
+  font-size:clamp(42px,7vw,76px);
+  line-height:1.04;
+  margin-bottom:22px;
+  letter-spacing:-1.5px;
+}
+.hero p {
+  font-size:20px;
+  color:rgba(255,255,255,.92);
+  max-width:660px;
+  margin-bottom:30px;
+}
+.hero-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.hero-points {
+  margin-top:32px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.hero-points span {
+  padding:10px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.18);
+  font-weight:800;
+}
+
+/* Shared */
+section { padding:90px 0; }
+.section-title {
+  max-width:780px;
+  margin-bottom:42px;
+}
+.section-title.center {
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+.section-title span {
+  color:var(--brown);
+  text-transform:uppercase;
+  letter-spacing:1.7px;
+  font-size:13px;
+  font-weight:900;
+}
+.section-title h2 {
+  margin-top:10px;
+  color:var(--green);
+  font-size:clamp(32px,4vw,50px);
+  line-height:1.12;
+}
+.section-title p {
+  margin-top:14px;
+  font-size:18px;
+  color:var(--muted);
+}
+
+/* About */
+.about { background:var(--cream2); }
+.about-grid {
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:44px;
+  align-items:center;
+}
+.about-photo {
+  min-height:520px;
+  border-radius:32px;
+  background:url('assets/Белый_дом_A-Frame/00.jpg') center/cover;
+  box-shadow:var(--shadow);
+}
+.features {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:26px;
+}
+.feature {
+  background:white;
+  padding:22px;
+  border-radius:24px;
+  box-shadow:var(--shadow-soft);
+  border:1px solid rgba(31,42,36,.06);
+}
+.feature strong {
+  display:block;
+  color:var(--green);
+  font-size:18px;
+  margin-bottom:5px;
+}
+.feature p { color:var(--muted); }
+
+/* Houses */
+.house-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.house-card {
+  background:white;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(31,42,36,.06);
+  transition:.2s;
+}
+.house-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 22px 56px rgba(20,35,26,.14);
+}
+.house-photo {
+  height:250px;
+  background:center/cover;
+  position:relative;
+}
+.house-photo::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.35));
+}
+.house-photo span {
+  position:absolute;
+  z-index:1;
+  left:15px;
+  top:15px;
+  background:rgba(255,255,255,.94);
+  color:var(--green);
+  padding:7px 11px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+}
+.house-info { padding:22px; }
+.house-info h3 {
+  color:var(--green);
+  font-size:24px;
+  margin-bottom:8px;
+}
+.house-info p {
+  color:var(--muted);
+  min-height:76px;
+}
+.house-prices {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:16px 0;
+}
+.house-prices div {
+  background:var(--cream);
+  padding:12px;
+  border-radius:16px;
+  border:1px solid rgba(31,42,36,.06);
+}
+.house-prices small {
+  display:block;
+  color:#788079;
+  font-size:12px;
+  font-weight:900;
+}
+.house-prices b {
+  color:var(--green);
+  font-size:18px;
+}
+.tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+.tags span {
+  background:var(--brown-soft);
+  color:#76512a;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+.text-link {
+  display:inline-flex;
+  align-items:center;
+  color:var(--brown);
+  font-weight:900;
+}
+
+/* Services */
+.services {
+  background:var(--green);
+  color:white;
+}
+.services .section-title h2,
+.services .section-title p { color:white; }
+.service-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.service-card {
+  background:white;
+  color:var(--text);
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(0,0,0,.18);
+}
+.service-img {
+  height:280px;
+  background:center/cover;
+}
+.service-info { padding:26px; }
+.service-info h3 {
+  color:var(--green);
+  font-size:28px;
+  margin-bottom:8px;
+}
+.service-info p { color:var(--muted); }
+.service-info .gallery-btn { margin-top:14px; }
+.service-lead { margin-bottom:14px; }
+.service-list {
+  margin:14px 0 0;
+  padding-left:18px;
+  color:var(--muted);
+}
+.service-list li { margin-bottom:10px; }
+.service-pricing {
+  margin-top:16px;
+  display:grid;
+  gap:10px;
+}
+.service-option {
+  background:#f7f1e6;
+  border:1px solid rgba(31,42,36,.08);
+  border-radius:18px;
+  padding:12px 14px;
+}
+.service-option strong {
+  display:block;
+  color:var(--green);
+  margin-bottom:4px;
+}
+.service-note {
+  margin-top:12px;
+  font-size:14px;
+  color:#556257;
+}
+.clickable-photo { cursor:pointer; }
+.extras-section {
+  background:linear-gradient(180deg, #f7f2e8 0%, #fbf8f3 100%);
+}
+.extras-section .section-title span { color:var(--green); }
+.extras-section .service-card { box-shadow:0 18px 45px rgba(20,35,26,.10); }
+.extras-section .service-info h3 { font-size:26px; }
+
+
+/* Prices */
+.price-box {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.price-card {
+  background:white;
+  padding:30px;
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(31,42,36,.06);
+}
+.price-card h3 {
+  color:var(--green);
+  font-size:23px;
+  margin-bottom:10px;
+}
+.price-card .big {
+  color:var(--brown);
+  font-size:36px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.price-card p { color:var(--muted); }
+
+/* Gallery */
+.gallery { background:var(--cream2); }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.gallery-item {
+  height:260px;
+  border-radius:24px;
+  background:center/cover;
+  box-shadow:0 12px 28px rgba(20,35,26,.10);
+}
+.gallery-item:nth-child(1),
+.gallery-item:nth-child(6) { grid-column:span 2; }
+
+/* Map */
+.map-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:center;
+}
+.scheme {
+  min-height:420px;
+  border-radius:30px;
+  background:url('assets/Схема_территории_Маривилл.png') center/contain no-repeat transparent;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(31,42,36,.06);
+}
+
+/* Contacts */
+.contacts {
+  background:var(--green);
+  color:white;
+}
+.contacts .section-title h2,
+.contacts .section-title p { color:white; }
+.contact-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.contact-card {
+  padding:32px;
+  border-radius:30px;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.14);
+}
+.contact-card h3 {
+  font-size:27px;
+  margin-bottom:14px;
+}
+.contact-card p {
+  color:rgba(255,255,255,.84);
+  margin-bottom:10px;
+}
+.contact-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:18px;
+}
+.footer {
+  background:var(--green-dark);
+  color:rgba(255,255,255,.72);
+  padding:26px 0;
+  text-align:center;
+}
+
+/* Floating */
+.float-actions {
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:60;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.float-actions a {
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:white;
+  font-weight:900;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+}
+.float-actions .wa { background:#1f8f4d; }
+.float-actions .vk { background:#2677d9; }
+
+@media(max-width:1060px) {
+  .nav { display:none; }
+  .about-grid,.house-grid,.service-grid,.price-box,.map-grid,.contact-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); }
+  .house-info p { min-height:auto; }
+}
+@media(max-width:560px) {
+  .header { top:8px; }
+  .header-inner {
+    padding:10px 12px;
+    border-radius:20px;
+  }
+  .logo { font-size:20px; }
+  .logo img { width:44px; height:44px; }
+  .header .btn { display:none; }
+  .hero { min-height:820px; padding-top:86px; }
+  .hero h1 { font-size:44px; }
+  .hero p { font-size:18px; }
+  section { padding:68px 0; }
+  .features,.gallery-grid,.house-prices { grid-template-columns:1fr; }
+  .gallery-item,.gallery-item:nth-child(1),.gallery-item:nth-child(6) {
+    grid-column:auto;
+    height:320px;
+  }
+  .about-photo { min-height:420px; }
+}
+
+
+/* Text polishing and booking accents */
+.text-highlight {
+  color: var(--green);
+  font-weight: 900;
+  background: rgba(154,106,53,.10);
+  border-radius: 8px;
+  padding: 1px 5px;
+}
+.hero-note {
+  margin-top: 20px;
+  max-width: 560px;
+  display: inline-flex;
+  padding: 11px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.20);
+  color: rgba(255,255,255,.92);
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+}
+.btn-booking,
+.btn-booking-light {
+  position: relative;
+  overflow: hidden;
+  animation: bookingPulse 2.4s ease-in-out infinite;
+}
+.btn-booking::after,
+.btn-booking-light::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -55%;
+  width: 42%;
+  height: 180%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.48), transparent);
+  transform: rotate(22deg);
+  animation: bookingShine 3.1s ease-in-out infinite;
+}
+.booking-link {
+  position: relative;
+  padding-right: 4px;
+}
+.booking-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(.32);
+  transform-origin: left;
+  transition: .2s;
+  opacity: .45;
+}
+.booking-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+@keyframes bookingPulse {
+  0%, 100% { box-shadow: 0 12px 26px rgba(23,56,39,.18); transform: translateY(0); }
+  50% { box-shadow: 0 16px 34px rgba(23,56,39,.28); transform: translateY(-1px); }
+}
+@keyframes bookingShine {
+  0% { left: -60%; }
+  42% { left: 125%; }
+  100% { left: 125%; }
+}
+.feature strong,
+.price-card h3,
+.service-info h3,
+.contact-card h3 {
+  letter-spacing: -.2px;
+}
+.house-info h3 {
+  letter-spacing: -.35px;
+}
+.section-title p {
+  max-width: 760px;
+}
+
+
+/* FAQ and route sections */
+.faq-section {
+  background: var(--cream2);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.faq-item {
+  background: white;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(31,42,36,.06);
+  box-shadow: var(--shadow-soft, 0 10px 26px rgba(20,35,26,.08));
+}
+.faq-item h3 {
+  color: var(--green);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.faq-item p {
+  color: var(--muted);
+}
+.faq-item strong {
+  color: var(--green);
+}
+
+.route-section {
+  background: var(--cream);
+}
+.route-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.route-card {
+  background: white;
+  padding: 28px;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(31,42,36,.06);
+}
+.route-card h3 {
+  color: var(--green);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.route-card p {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.route-card strong {
+  color: var(--green);
+}
+.route-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.route-tips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.route-tips div {
+  background: rgba(255,255,255,.7);
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(31,42,36,.06);
+}
+.route-tips strong {
+  display: block;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.route-tips p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.map-placeholder {
+  min-height: 520px;
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(23,56,39,.88), rgba(23,56,39,.58)),
+    url('assets/9 фото(пирс около дома рыбака и белого).jpg') center/cover;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  padding: 30px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.map-placeholder div {
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  padding: 22px;
+  backdrop-filter: blur(10px);
+}
+.map-placeholder h3 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.map-placeholder p {
+  color: rgba(255,255,255,.86);
+}
+@media(max-width:980px){
+  .faq-grid,
+  .route-grid,
+  .route-tips {
+    grid-template-columns: 1fr;
+  }
+  .map-placeholder {
+    min-height: 420px;
+  }
+}
+
+
+/* Updated booking button animation: calmer and less distracting */
+.btn-booking,
+.btn-booking-light {
+  animation: bookingSoftGlow 4.8s ease-in-out infinite;
+}
+.btn-booking::after,
+.btn-booking-light::after {
+  opacity: .35;
+  animation: bookingSoftShine 6.2s ease-in-out infinite;
+}
+@keyframes bookingSoftGlow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 12px 24px rgba(23,56,39,.16);
+  }
+  50% {
+    transform: translateY(-.5px);
+    box-shadow: 0 14px 28px rgba(23,56,39,.20);
+  }
+}
+@keyframes bookingSoftShine {
+  0% { left: -70%; }
+  28% { left: 125%; }
+  100% { left: 125%; }
+}
+.pet-yes {
+  background: #e4f3e9 !important;
+  color: #1f6b3b !important;
+}
+.pet-no {
+  background: #f0ece5 !important;
+  color: #7a6a58 !important;
+}
+
+
+/* Refined section identity: blocks differ slightly but stay in one visual system */
+.about {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(154,106,53,.08), transparent 28%),
+    var(--cream2);
+}
+.about .feature {
+  border-left: 4px solid rgba(154,106,53,.35);
+}
+
+#houses {
+  background:
+    linear-gradient(180deg, var(--cream), #f8f1e7);
+}
+#houses .house-card:nth-child(2n) {
+  transform: translateY(10px);
+}
+#houses .house-card:nth-child(2n):hover {
+  transform: translateY(6px);
+}
+.house-prices small {
+  line-height: 1.15;
+}
+.house-prices div:first-child {
+  background: #f1e5d5;
+}
+.house-prices div:last-child {
+  background: #eef4ef;
+}
+
+.services {
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255,255,255,.10), transparent 26%),
+    linear-gradient(135deg, var(--green), #10261b);
+}
+.service-card {
+  border: 1px solid rgba(255,255,255,.12);
+}
+.service-info h3::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--brown);
+  margin-top: 8px;
+}
+
+#prices {
+  background:
+    linear-gradient(180deg, var(--cream), #fffaf2);
+}
+.price-card {
+  position: relative;
+  overflow: hidden;
+}
+.price-card::before {
+  content: "";
+  position: absolute;
+  right: -36px;
+  top: -36px;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(154,106,53,.10);
+}
+.price-card > * {
+  position: relative;
+}
+
+.gallery {
+  background:
+    linear-gradient(180deg, var(--cream2), #f4ecdf);
+}
+.gallery-grid {
+  align-items: stretch;
+}
+.gallery-item:nth-child(3n) {
+  min-height: 300px;
+}
+.gallery-item {
+  transition: transform .22s, box-shadow .22s;
+}
+.gallery-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(20,35,26,.16);
+}
+
+.faq-section {
+  background:
+    radial-gradient(circle at 80% 0%, rgba(23,56,39,.07), transparent 30%),
+    #fffaf2;
+}
+.faq-item {
+  border-top: 4px solid rgba(23,56,39,.18);
+}
+.faq-item:nth-child(2n) {
+  border-top-color: rgba(154,106,53,.28);
+}
+
+.route-section {
+  background:
+    linear-gradient(135deg, #f5efe5, #fbf8f3);
+}
+.route-card {
+  border-left: 5px solid rgba(154,106,53,.45);
+}
+.map-placeholder {
+  background:
+    linear-gradient(135deg, rgba(23,56,39,.88), rgba(23,56,39,.55)),
+    url('assets/9 фото(пирс около дома рыбака и белого).jpg') center/cover;
+}
+
+.contacts {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.08), transparent 28%),
+    linear-gradient(135deg, var(--green), #0f261b);
+}
+
+@media(max-width:980px){
+  #houses .house-card:nth-child(2n),
+  #houses .house-card:nth-child(2n):hover {
+    transform: none;
+  }
+}
+
+
+/* Photo gallery modal */
+.gallery-btn {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(23,56,39,.16);
+  background: #ffffff;
+  color: var(--green);
+  font-weight: 900;
+  cursor: pointer;
+  transition: .18s;
+}
+.gallery-btn:hover {
+  background: var(--green);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.service-gallery-btn {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+.photo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  background: rgba(8, 20, 14, .82);
+  backdrop-filter: blur(8px);
+  padding: 24px;
+}
+.photo-modal.active {
+  display: grid;
+  place-items: center;
+}
+.photo-modal-inner {
+  width: min(1120px, 96vw);
+  max-height: 92vh;
+  background: #fbf8f3;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,.35);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.photo-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(31,42,36,.10);
+}
+.photo-modal-head h3 {
+  color: var(--green);
+  font-size: 24px;
+}
+.photo-modal-close {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--green);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+.photo-modal-body {
+  padding: 18px;
+  overflow: auto;
+}
+.photo-gallery-main {
+  height: min(58vh, 620px);
+  border-radius: 22px;
+  background: #eee center/contain no-repeat;
+  margin-bottom: 14px;
+  border: 1px solid rgba(31,42,36,.08);
+}
+.photo-gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.photo-gallery-thumbs button {
+  height: 86px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: #ddd center/cover;
+  cursor: pointer;
+  transition: .15s;
+}
+.photo-gallery-thumbs button:hover,
+.photo-gallery-thumbs button.active {
+  border-color: var(--brown);
+  transform: translateY(-1px);
+}
+body.modal-open {
+  overflow: hidden;
+}
+@media(max-width:560px) {
+  .photo-modal {
+    padding: 10px;
+  }
+  .photo-modal-inner {
+    border-radius: 20px;
+    max-height: 94vh;
+  }
+  .photo-gallery-main {
+    height: 48vh;
+  }
+  .photo-gallery-thumbs {
+    grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  }
+  .photo-gallery-thumbs button {
+    height: 68px;
+  }
+}
+
+
+/* House card mini slider */
+.house-slider {
+  cursor: grab;
+  transition: filter .18s ease;
+}
+.house-slider:active {
+  cursor: grabbing;
+}
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  color: var(--green);
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: .18s;
+  box-shadow: 0 8px 18px rgba(0,0,0,.14);
+}
+.slide-prev { left: 12px; }
+.slide-next { right: 12px; }
+.house-slider:hover .slide-btn { opacity: 1; }
+.slide-btn:hover {
+  background: var(--green);
+  color: white;
+}
+.slide-hint {
+  position: absolute;
+  z-index: 3;
+  left: 15px;
+  bottom: 15px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: .18s;
+}
+.house-slider:hover .slide-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+.house-slider.is-changing {
+  filter: brightness(.94);
+}
+.btn-tg {
+  background: #2aabee;
+  color: white;
+}
+.btn-tg:hover {
+  background: #1d99d6;
+}
+@media(max-width: 980px) {
+  .slide-btn,
+  .slide-hint {
+    opacity: 1;
+  }
+}
+
+
+/* v3 cursor preview and scheme fix */
+.house-slider, .service-slider { cursor: ew-resize; transition: filter .18s ease; }
+.service-slider { position: relative; }
+.house-slider.is-changing, .service-slider.is-changing { filter: brightness(.96); }
+.slide-hint { pointer-events: none; }
+.service-slider:hover .slide-btn, .service-slider:hover .slide-hint { opacity: 1; }
+.scheme-card { background:transparent; border-radius:30px; padding:0; box-shadow:none; border:0; overflow:hidden; }
+.scheme-card img { width:100%; height:auto; display:block; border-radius:26px; object-fit:contain; mix-blend-mode:normal; }
+.gallery-item { background-color:#eee; }
+@media(max-width:560px){ .scheme-card{padding:10px;border-radius:22px;} .scheme-card img{border-radius:16px;} }
+
+
+
+/* v4 gallery, smooth previews, scheme and map updates */
+.inline-booking-link {
+  color: var(--brown);
+  font-weight: 900;
+  border-bottom: 2px solid rgba(154,106,53,.35);
+}
+.inline-booking-link:hover { border-bottom-color: var(--brown); }
+.house-slider,
+.service-slider {
+  position: relative;
+  overflow: hidden;
+  transition: filter .22s ease;
+}
+.slider-fade-layer {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:center/cover no-repeat;
+  opacity:0;
+  transition:opacity .42s ease;
+}
+.slider-fade-layer.visible { opacity:1; }
+.house-photo > span,
+.house-photo::after,
+.service-img::after,
+.slide-btn,
+.slide-hint { position:absolute; }
+.slide-btn,
+.slide-hint,
+.house-photo span { z-index:4; }
+.house-photo::after { z-index:2; pointer-events:none; }
+.service-img::after {
+  content:"";
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.22));
+}
+.gallery-item {
+  cursor: zoom-in;
+  position: relative;
+  overflow: hidden;
+}
+.gallery-item::after {
+  content:"Открыть";
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(255,255,255,.9);
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+  opacity:0;
+  transform:translateY(4px);
+  transition:.18s;
+}
+.gallery-item:hover::after { opacity:1; transform:translateY(0); }
+.photo-gallery-main {
+  position:relative;
+  overflow:hidden;
+  transition:opacity .22s ease;
+}
+.photo-gallery-main.is-switching { opacity:.72; }
+.modal-nav {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.92);
+  color:var(--green);
+  font-size:34px;
+  line-height:1;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+.modal-prev { left:16px; }
+.modal-next { right:16px; }
+.modal-nav:hover { background:var(--green); color:#fff; }
+.map-embed {
+  min-height: 470px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(31,42,36,.08);
+  background: #e6ece8;
+}
+.map-embed iframe { display:block; border:0; width:100%; height:470px; }
+@media(max-width:560px){
+  .modal-nav { width:40px; height:40px; font-size:28px; }
+  .map-embed { min-height:360px; border-radius:22px; }
+  .map-embed iframe { height:360px; }
+}
+
+
+
+/* v4.2 fixes: clean wording, clickable galleries, zoomable modal and integrated map */
+.house-slider,
+.service-slider { cursor: pointer; }
+.house-slider:active,
+.service-slider:active { cursor: pointer; }
+.photo-modal-actions {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+.photo-zoom-btn {
+  min-width:42px;
+  height:42px;
+  padding:0 12px;
+  border:0;
+  border-radius:999px;
+  background:#efe7da;
+  color:var(--green);
+  font-weight:900;
+  font-size:18px;
+  cursor:pointer;
+  transition:.18s;
+}
+.photo-zoom-reset {
+  min-width:68px;
+  font-size:13px;
+}
+.photo-zoom-btn:hover {
+  background:var(--brown);
+  color:#fff;
+}
+.photo-gallery-main {
+  cursor: zoom-in;
+  background-size: contain;
+  background-position:center;
+}
+.photo-gallery-main.is-zoomed {
+  cursor: zoom-out;
+  background-color:#151a16;
+}
+.map-embed {
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:0 24px 60px rgba(31,42,36,.18);
+  overflow:hidden;
+  border-radius:30px;
+  line-height:0;
+}
+.map-embed iframe {
+  display:block;
+  width:100%;
+  height:470px;
+  border:0;
+  border-radius:30px;
+  background:transparent;
+}
+.route-section .map-embed {
+  align-self:stretch;
+}
+@media(max-width:560px){
+  .photo-modal-head { align-items:flex-start; }
+  .photo-modal-actions { gap:6px; }
+  .photo-zoom-btn { min-width:36px; height:36px; padding:0 10px; }
+  .photo-zoom-reset { min-width:58px; font-size:12px; }
+  .map-embed,
+  .map-embed iframe { border-radius:20px; }
+}
+
+
+/* v4.3: natural photo zoom, draggable image, cleaner map and contact buttons */
+.photo-modal-actions {
+  gap: 10px;
+}
+.photo-zoom-btn,
+.photo-zoom-reset {
+  display: none !important;
+}
+.photo-zoom-help {
+  color: rgba(255,255,255,.76);
+  font-size: 13px;
+  line-height: 1.35;
+  margin-right: 6px;
+  max-width: 420px;
+}
+.photo-gallery-main {
+  cursor: zoom-in;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  user-select: none;
+  touch-action: none;
+}
+.photo-gallery-main.is-zoomed {
+  cursor: grab;
+}
+.photo-gallery-main.is-zoomed.is-dragging {
+  cursor: grabbing;
+}
+.photo-gallery-main::after {
+  content: "Колесико — приблизить • двойной клик — увеличить • перетащите фото";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  z-index: 3;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.42);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: .18s;
+}
+.photo-modal.active .photo-gallery-main:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.map-embed {
+  position: relative;
+  min-height: 520px;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(31,42,36,.08);
+  background:
+    linear-gradient(135deg, rgba(23,56,39,.12), rgba(179,134,74,.10)),
+    var(--cream);
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+.map-embed iframe {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 16px);
+  min-height: 536px;
+  border: 0;
+  border-radius: 0;
+  display: block;
+  background: transparent;
+}
+.route-section .map-embed {
+  align-self: stretch;
+}
+.btn-instagram {
+  background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  color: white;
+}
+.btn-instagram:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(131,58,180,.22);
+}
+.social-note {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+}
+.contact-card .social-note {
+  color: rgba(255,255,255,.75);
+}
+@media(max-width: 720px) {
+  .photo-zoom-help { display:none; }
+  .photo-gallery-main::after { content:"Двойной тап — приблизить • свайпайте фото"; max-width: calc(100% - 36px); white-space: normal; border-radius: 18px; }
+  .map-embed { min-height: 380px; border-radius: 24px; }
+  .map-embed iframe { min-height: 396px; }
+}
+
+
+
+/* v4.4 visual corrections: prices, compact map, header contrast, gold booking button, clean floating contacts */
+.header-inner {
+  background: rgba(20, 43, 31, .94);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 18px 46px rgba(8,22,15,.22);
+}
+.logo { color: #fff; }
+.nav {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.88);
+}
+.nav a:hover {
+  background: rgba(255,255,255,.92);
+  color: var(--green);
+}
+.btn-booking,
+.btn-booking-light {
+  background: linear-gradient(135deg, #d6a44b, #b87924);
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(184,121,36,.30);
+}
+.btn-booking:hover,
+.btn-booking-light:hover {
+  background: linear-gradient(135deg, #e0b75f, #a9681d);
+  box-shadow: 0 18px 36px rgba(184,121,36,.38);
+}
+@keyframes bookingSoftGlow {
+  0%, 100% { transform: translateY(0); box-shadow: 0 14px 30px rgba(184,121,36,.26); }
+  50% { transform: translateY(-.5px); box-shadow: 0 18px 38px rgba(184,121,36,.34); }
+}
+.hero h1 {
+  line-height: 1.09;
+  margin-bottom: 28px;
+  max-width: 860px;
+  text-shadow: 0 8px 28px rgba(0,0,0,.22);
+}
+.hero p {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  max-width: 700px;
+}
+.hero-content { padding-top: 108px; }
+
+#prices {
+  background: linear-gradient(180deg, #f7efe2, #fffaf2);
+}
+.price-box {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.price-card {
+  position: relative;
+  overflow: visible;
+  padding: 30px 28px 28px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffffff, #fffaf2);
+  border: 1px solid rgba(154,106,53,.16);
+  box-shadow: 0 18px 44px rgba(31,42,36,.09);
+}
+.price-card::before {
+  display: none !important;
+}
+.price-card::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 0;
+  height: 5px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg, #d6a44b, #9a6a35);
+}
+.price-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green);
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.price-card h3::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  border-radius: 50%;
+  background: #d6a44b;
+  box-shadow: 0 0 0 6px rgba(214,164,75,.16);
+}
+.price-card .big {
+  font-size: 38px;
+  line-height: 1;
+  color: #9a6a35;
+  margin-bottom: 14px;
+}
+.price-card p { font-size: 15px; }
+
+.route-grid {
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, .78fr);
+  align-items: center;
+}
+.map-embed {
+  width: min(100%, 440px);
+  justify-self: end;
+  min-height: 0 !important;
+  height: 340px;
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.18);
+  background: #173827;
+  box-shadow: 0 18px 42px rgba(31,42,36,.16);
+  overflow: hidden;
+  line-height: 0;
+}
+.map-embed iframe {
+  position: static !important;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #dfe7dd;
+}
+
+.float-actions {
+  right: 16px;
+  bottom: 16px;
+  gap: 9px;
+}
+.float-actions a {
+  width: 50px;
+  height: 50px;
+  font-size: 13px;
+  letter-spacing: .2px;
+}
+.float-actions .tg { background: #229ed9; }
+.float-actions .ig { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
+
+@media(max-width:1060px) {
+  .route-grid { grid-template-columns: 1fr; }
+  .map-embed { justify-self: stretch; width: 100%; max-width: 620px; height: 360px; }
+}
+@media(max-width:720px) {
+  .price-box { grid-template-columns: 1fr; }
+  .hero-content { padding-top: 92px; }
+  .hero h1 { margin-bottom: 24px; }
+  .map-embed { max-width: none; height: 320px; border-radius: 22px; }
+  .float-actions a { width: 46px; height: 46px; font-size: 12px; }
+}
+
+
+/* Final safe fixes from v4.5 — file names preserved, gallery JS untouched */
+
+/* Header booking button size */
+.header .btn-booking {
+  padding: 10px 15px;
+  min-height: 42px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+/* Hero text spacing fix */
+.hero {
+  padding-top: 132px;
+}
+.hero-content {
+  padding-top: 76px !important;
+}
+.hero h1 {
+  margin-bottom: 36px !important;
+}
+.hero p {
+  display: block !important;
+  clear: both;
+  position: relative;
+  z-index: 4;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: 0 6px 24px rgba(0,0,0,.22);
+}
+.hero p::before,
+.hero p::after,
+.hero h1::before,
+.hero h1::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Better additional services cards */
+.extras-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 8%, rgba(214,164,75,.16), transparent 30%),
+    radial-gradient(circle at 90% 12%, rgba(23,56,39,.10), transparent 28%),
+    linear-gradient(180deg, #f7f2e8 0%, #fbf8f3 100%);
+}
+.extras-section .container {
+  position: relative;
+  z-index: 1;
+}
+.extras-section .service-grid {
+  gap: 28px;
+  align-items: stretch;
+}
+.extras-section .service-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(154,106,53,.18);
+  background: linear-gradient(180deg,#fffdf8,#fff8ef);
+  box-shadow: 0 24px 58px rgba(31,42,36,.12);
+}
+.extras-section .service-card::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 0;
+  height: 5px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg,#d6a44b,#9a6a35);
+  z-index: 2;
+  pointer-events: none;
+}
+.extras-section .service-img {
+  height: 320px;
+  border-bottom: 1px solid rgba(154,106,53,.12);
+}
+.extras-section .service-info {
+  padding: 28px;
+}
+.extras-section .service-info h3 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+.extras-section .service-lead {
+  font-size: 16px;
+  color: #526157;
+}
+.extras-section .service-option {
+  background: rgba(245,239,229,.72);
+  border: 1px solid rgba(154,106,53,.18);
+  border-radius: 18px;
+  padding: 13px 15px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.60);
+}
+.extras-section .service-option strong {
+  color: #8d5f2c;
+  font-size: 16px;
+}
+.extras-section .gallery-btn {
+  margin-top: 16px;
+  background: #173827;
+  color: #fff;
+  border-color: rgba(23,56,39,.22);
+}
+.extras-section .gallery-btn:hover {
+  background: #9a6a35;
+}
+.extras-section .service-note {
+  background: rgba(214,164,75,.13);
+  border: 1px solid rgba(214,164,75,.22);
+  border-radius: 16px;
+  padding: 10px 12px;
+  color: #4d5c52;
+}
+
+/* Territory scheme border */
+.scheme-card {
+  background: #fffaf2 !important;
+  padding: 12px !important;
+  border-radius: 30px !important;
+  border: 1px solid rgba(154,106,53,.30) !important;
+  box-shadow: 0 22px 55px rgba(31,42,36,.16) !important;
+}
+.scheme-card img {
+  border-radius: 22px !important;
+  border: 1px solid rgba(31,42,36,.10);
+}
+
+/* Balanced map size and shape */
+.route-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 470px);
+  align-items: center;
+}
+.map-embed {
+  position: relative;
+  width: min(100%, 470px);
+  height: 380px;
+  aspect-ratio: auto;
+  justify-self: end;
+  border-radius: 28px;
+  border: 1px solid rgba(154,106,53,.22);
+  background: linear-gradient(180deg,#173827,#10271b);
+  box-shadow: 0 20px 48px rgba(31,42,36,.18);
+  overflow: hidden;
+}
+.map-embed iframe {
+  height: 100% !important;
+  width: 100% !important;
+  display: block;
+  background: #dfe7dd;
+}
+
+@media(max-width:1060px) {
+  .route-grid { grid-template-columns: 1fr; }
+  .map-embed { justify-self: stretch; width: 100%; max-width: 560px; height: 360px; }
+}
+@media(max-width:720px) {
+  .hero { padding-top: 112px; min-height: 860px; }
+  .hero-content { padding-top: 66px !important; }
+  .hero h1 { margin-bottom: 30px !important; }
+  .header .btn-booking { display: none; }
+  .extras-section .service-img { height: 280px; }
+  .map-embed { max-width: none; height: 330px; }
+}
+
+
+/* v4.8 requested fixes — filenames preserved */
+
+/* Header booking button: keep it inside the header container */
+.header-inner {
+  gap: 12px;
+}
+.header .btn-booking {
+  padding: 9px 13px;
+  min-height: 40px;
+  border-radius: 13px;
+  font-size: 13px;
+  line-height: 1.1;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+@media(max-width:1180px) {
+  .header .btn-booking { display: none; }
+}
+
+/* About photo rotating gallery */
+.about-photo {
+  position: relative;
+  overflow: hidden;
+  transition: background-image 1.1s ease-in-out, filter .35s ease;
+}
+.about-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.08));
+}
+
+/* Extra services: warmer card design with light emoji labels */
+.extras-section {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(214,164,75,.16), transparent 30%),
+    radial-gradient(circle at 88% 18%, rgba(23,56,39,.10), transparent 28%),
+    linear-gradient(180deg, #f7f2e8 0%, #fbf8f3 100%);
+}
+.extras-section .service-grid {
+  gap: 30px;
+  align-items: stretch;
+}
+.extras-section .service-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(154,106,53,.20);
+  background: linear-gradient(180deg,#fffdf8,#fff7eb);
+  box-shadow: 0 24px 58px rgba(31,42,36,.13);
+}
+.extras-section .service-card::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 0;
+  height: 5px;
+  border-radius: 0 0 999px 999px;
+  background: linear-gradient(90deg,#d6a44b,#9a6a35);
+  z-index: 2;
+  pointer-events: none;
+}
+.extras-section .service-card:nth-child(1) .service-info h3::before {
+  content: "❤️ ";
+}
+.extras-section .service-card:nth-child(2) .service-info h3::before {
+  content: "🌿 ";
+}
+.extras-section .service-img {
+  height: 325px;
+  border-bottom: 1px solid rgba(154,106,53,.13);
+}
+.extras-section .service-info {
+  padding: 28px;
+}
+.extras-section .service-info h3 {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+.extras-section .service-lead {
+  font-size: 16px;
+  color: #526157;
+}
+.extras-section .service-pricing {
+  gap: 12px;
+}
+.extras-section .service-option {
+  background: rgba(245,239,229,.80);
+  border: 1px solid rgba(154,106,53,.20);
+  border-radius: 18px;
+  padding: 13px 15px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
+}
+.extras-section .service-option strong {
+  color: #8d5f2c;
+  font-size: 16px;
+}
+.extras-section .service-note {
+  background: rgba(214,164,75,.14);
+  border: 1px solid rgba(214,164,75,.24);
+  border-radius: 16px;
+  padding: 10px 12px;
+  color: #4d5c52;
+}
+.extras-section .gallery-btn {
+  margin-top: 16px;
+  background: #173827;
+  color: #fff;
+  border-color: rgba(23,56,39,.20);
+}
+.extras-section .gallery-btn:hover {
+  background: #9a6a35;
+}
+
+/* Territory scheme: black outline, no white frame */
+.scheme-card {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 28px !important;
+  border: 2px solid rgba(0,0,0,.72) !important;
+  box-shadow: 0 22px 55px rgba(31,42,36,.16) !important;
+  overflow: hidden;
+}
+.scheme-card img {
+  display: block;
+  border-radius: 25px !important;
+  border: 0 !important;
+}
+
+/* Navigation map: slightly bigger but still balanced */
+.route-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 540px);
+  align-items: center;
+}
+.map-embed {
+  width: min(100%, 540px);
+  height: 410px;
+  justify-self: end;
+  border-radius: 28px;
+}
+.map-embed iframe {
+  width: 100% !important;
+  height: 100% !important;
+}
+@media(max-width:1060px) {
+  .route-grid { grid-template-columns: 1fr; }
+  .map-embed { justify-self: stretch; width: 100%; max-width: 620px; height: 390px; }
+}
+@media(max-width:720px) {
+  .extras-section .service-img { height: 280px; }
+  .map-embed { max-width: none; height: 340px; }
+}
+
+
+/* v4.9 responsive header, smoother about slider, bigger map */
+.header-inner {
+  gap: clamp(6px, .9vw, 12px) !important;
+  padding: 9px 11px 9px 14px;
+}
+.logo {
+  flex: 0 0 auto;
+  gap: 8px;
+  font-size: clamp(18px, 1.6vw, 23px);
+}
+.logo img {
+  width: clamp(38px, 4vw, 50px);
+  height: clamp(38px, 4vw, 50px);
+}
+.nav {
+  display: flex !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: flex-start;
+  gap: clamp(3px, .45vw, 6px);
+  font-size: clamp(11px, .95vw, 14px);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  padding: clamp(7px, .8vw, 10px) clamp(8px, .95vw, 14px);
+  white-space: nowrap;
+}
+.header .btn-booking {
+  padding: 8px 11px !important;
+  min-height: 38px !important;
+  font-size: clamp(12px, .95vw, 13px) !important;
+}
+@media(max-width:1180px) {
+  .header .btn-booking { display: none !important; }
+}
+@media(max-width:760px) {
+  .header-inner { flex-wrap: wrap; border-radius: 20px; }
+  .nav { order: 3; width: 100%; flex-basis: 100%; }
+  .logo { flex: 0 0 auto; }
+}
+@media(max-width:560px) {
+  .nav { display: flex !important; }
+}
+
+.about-photo {
+  background-image: none !important;
+  background-color: #d8ded6;
+}
+.about-photo-layer {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity 2.4s ease-in-out, transform 8.5s ease;
+  will-change: opacity, transform;
+}
+.about-photo-layer.active {
+  opacity: 1;
+  transform: scale(1.045);
+}
+.about-photo::after {
+  z-index: 3;
+}
+
+#bathhouse .service-slider {
+  cursor: pointer;
+}
+#bathhouse .service-info .service-note {
+  margin-top: 12px;
+}
+
+.route-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 610px) !important;
+}
+.map-embed {
+  width: min(100%, 610px) !important;
+  height: 455px !important;
+}
+@media(max-width:1060px) {
+  .map-embed { width: 100% !important; max-width: 680px !important; height: 420px !important; }
+}
+@media(max-width:720px) {
+  .map-embed { max-width: none !important; height: 360px !important; }
+}
+
+
+/* v4.10 header booking visibility and house feature text */
+.header-inner {
+  flex-wrap: nowrap;
+}
+.header .btn-booking {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  padding: 8px 11px !important;
+  min-height: 38px !important;
+  border-radius: 13px !important;
+  font-size: clamp(12px, .9vw, 13px) !important;
+  white-space: nowrap;
+}
+@media(max-width:1180px) {
+  .header-inner {
+    flex-wrap: wrap !important;
+    align-items: center;
+  }
+  .logo {
+    order: 1;
+    flex: 0 0 auto;
+  }
+  .header .btn-booking {
+    order: 2;
+    margin-left: auto;
+    display: inline-flex !important;
+  }
+  .nav {
+    order: 3;
+    flex: 1 0 100%;
+    width: 100%;
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+}
+@media(max-width:560px) {
+  .header .btn-booking {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+  .logo span { font-size: 18px; }
+}
+.house-extra {
+  margin: 14px 0 14px;
+  padding: 14px 15px;
+  border-radius: 18px;
+  background: rgba(245,239,229,.72);
+  border: 1px solid rgba(154,106,53,.18);
+  color: #4d5c52;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+.house-extra strong {
+  color: var(--green);
+  font-weight: 900;
+}
+.house-extra .house-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.house-extra .house-meta span {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  color: #31443a;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <a class="logo" href="#"><img src="assets/logo.png" alt="Маривилл"><span>Маривилл</span></a>
+    <nav class="nav">
+      <a href="#about">О нас</a>
+      <a href="#houses">Домики</a>
+      <a href="#extras">Доп. услуги</a>
+      <a href="#bathhouse">Баня и фурако</a>
+      <a href="#prices">Цены</a>
+      <a href="#faq">FAQ</a>
+      <a href="#route">Как добраться</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn-booking" href="https://bronirui.online/marivill" target="_blank">Забронировать дом</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-content">
+    <span class="eyebrow">Гостевые дома у Волги</span>
+    <h1>Маривилл — гостевые дома у Волги с фурако и баней</h1>
+    <p>Семь уютных домов на природе, горячие фурако у домов, баня, пирс и спокойная атмосфера для отдыха семьёй, парой или компанией.</p>
+    <div class="hero-actions">
+      <a class="btn btn-light" href="#houses">Выбрать дом</a>
+      <a class="btn btn-vk" href="https://vk.com/maryvill12" target="_blank">Написать в VK</a>
+    </div>
+    <div class="hero-note">Бронирование доступно онлайн — можно сразу проверить свободные даты и стоимость.</div>
+<div class="hero-points"><span>7 домов</span><span>фурако у домов</span><span>баня</span><span>Волга и пирс</span></div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="container about-grid">
+    <div>
+      <div class="section-title">
+        <span>О нас</span>
+        <h2>О гостевых домах Маривилл</h2>
+        <p>Маривилл — гостевые дома с отдельными домами у Волги. К нам приезжают на выходные, семейные праздники, отдых с друзьями и спокойную перезагрузку от города. На территории есть баня, фурако, пирс, мангальные зоны и красивые виды у воды.</p>
+      </div>
+      <div class="features">
+        <div class="feature"><strong>Отдельные дома</strong><p>Под разные компании: от 4 до 10 гостей.</p></div>
+        <div class="feature"><strong>Фурако</strong><p>У каждого дома есть горячая купель.</p></div>
+        <div class="feature"><strong>Баня</strong><p>Отдельная баня на территории гостевых домов.</p></div>
+        <div class="feature"><strong>Скидки</strong><p><span class="text-highlight">10% при бронировании от 2 ночей</span>, в день рождения и постоянным гостям.</p></div>
+      </div>
+    </div>
+    <div class="about-photo"></div>
+  </div>
+</section>
+
+<section id="houses">
+  <div class="container">
+    <div class="section-title center">
+      <span>Домики</span>
+      <h2>Дома для отдыха</h2>
+      <p>Цены указаны за двоих гостей. <span class="text-highlight">Дополнительный гость с ночёвкой — 1 000 ₽</span>, <span class="text-highlight">гость без ночёвки до 21:00 — 500 ₽</span>. <span class="text-highlight">Дети до 12 лет размещаются бесплатно</span>.</p>
+    </div>
+    <div class="house-grid">
+      
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Белый дом A-Frame" data-index="0" style="background-image:url('assets/Белый_дом_A-Frame/00.jpg')">
+          <span>до 4 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Белый дом A-Frame</h3>
+          <p>Уютный A-frame для отдыха вдвоём, семьёй или небольшой компанией.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> этот дом особенно любят молодожёны и семейные пары. По мнению наших гостей, это самый романтичный и приятный дом в Маривилл.<div class="house-meta"><span>45 м²</span><span>до 4 гостей с ночёвкой</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>9 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>11 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>A-frame</span><span>фурако</span><span>до 4 гостей</span><span class="pet-yes">можно с животными</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Белый дом A-Frame')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Дом рыбака" data-index="0" style="background-image:url('assets/Дом_рыбака/00.jpg')">
+          <span>до 6 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Дом рыбака</h3>
+          <p>Дом для спокойного отдыха у воды, рыбалки, семейных выходных и уютных вечеров на природе.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> стены внутри окрашены в мягкий зеленоватый оттенок. Здесь комфортно находиться: создаётся ощущение полного погружения в природу, будто зелёный лес окружает вас не только снаружи, но и внутри.<div class="house-meta"><span>65 м²</span><span>до 6 гостей с ночёвкой</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>10 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>12 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>до 6 гостей</span><span>у воды</span><span>фурако</span><span class="pet-yes">можно с животными</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Дом рыбака')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Дом охотника" data-index="0" style="background-image:url('assets/Дом_охотника/00.jpg')">
+          <span>до 6 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Дом охотника</h3>
+          <p>Просторный дом для семьи или компании с комфортной зоной отдыха.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> самый брутальный дом в Маривилл. Внутри на стене висит настоящая шкура медведя, поэтому этот дом особенно нравится мужчинам. Из дома открывается один из самых красивых видов на Волгу.<div class="house-meta"><span>65 м²</span><span>до 6 гостей с ночёвкой</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>11 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>13 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>до 6 гостей</span><span>просторно</span><span>фурако</span><span class="pet-yes">можно с животными</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Дом охотника')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Барнхаус Альпийский" data-index="0" style="background-image:url('assets/Барнхаус_Альпийский/00.jpg')">
+          <span>до 4 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Барнхаус Альпийский</h3>
+          <p>Небольшой барнхаус для тихого загородного отдыха, выходных вдвоём или небольшой семьи.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> маленький барн, соседний к «Лагуне». В доме есть отдельная небольшая спальня с кроватью 140×200. Плюс «Альпийского» — он расположен ближе к спуску на Волгу.<div class="house-meta"><span>35 м²</span><span>до 4 гостей с ночёвкой</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>8 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>10 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>барнхаус</span><span>до 4 гостей</span><span>фурако</span><span class="pet-no">без животных</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Барнхаус Альпийский')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Барнхаус Лагуна" data-index="0" style="background-image:url('assets/Барнхаус_Лагуна/00.jpg')">
+          <span>до 4 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Барнхаус Лагуна</h3>
+          <p>Уютный одноэтажный барнхаус для отдыха у природы, спокойных вечеров и перезагрузки от города.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> самый крайний справа дом, если смотреть на схему территории. Это миниатюрный одноэтажный дом на двоих, максимум до 4 гостей с ночёвкой. Внутри есть небольшая отдельная спальня с кроватью 140×200. Дом подойдёт гостям, которым важно наличие отдельной комнаты, а также семьям с детьми, потому что здесь нет лестниц.<div class="house-meta"><span>35 м²</span><span>до 4 гостей с ночёвкой</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>8 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>10 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>барнхаус</span><span>до 4 гостей</span><span>фурако</span><span class="pet-no">без животных</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Барнхаус Лагуна')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Большой барн Изба" data-index="0" style="background-image:url('assets/Большой_барн_Изба/00.jpeg')">
+          <span>до 10 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Большой барн Изба</h3>
+          <p>Большой дом для семьи, компании или небольшого праздника.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> по мнению многих гостей, это самый уютный дом. На нижнем этаже сохранён деревянный сруб, благодаря чему летом даже в жару здесь очень комфортно находиться, дышать и спать. В доме три полноценные спальни: две наверху и одна внизу, с кроватями 160×200.<div class="house-meta"><span>100 м²</span><span>до 10 гостей с ночёвкой</span><span>3 спальни</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>13 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>15 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>до 10 гостей</span><span>компания</span><span>фурако</span><span class="pet-no">без животных</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Большой барн Изба')">Смотреть фото</button>
+        </div>
+      </article>
+    
+      <article class="house-card">
+        <div class="house-photo house-slider" data-gallery="Большой барн Шале" data-index="0" style="background-image:url('assets/Большой_барн_Шале/00.jpg')">
+          <span>до 10 гостей</span>
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="house-info">
+          <h3>Большой барн Шале</h3>
+          <p>Просторный барн для большой компании с увеличенным фурако.</p>
+          <div class="house-extra"><strong>Особенность дома:</strong> второй дом с тремя спальными комнатами, где, как и в «Избе», сохранён деревянный сруб. Плюс «Шале» — более открытый вид и близость к спуску на Волгу.<div class="house-meta"><span>100 м²</span><span>до 10 гостей с ночёвкой</span><span>3 спальни</span></div></div>
+          <div class="house-prices">
+            <div><small>Пн–Чт, Вс</small><b>13 000 ₽</b></div>
+            <div><small>Пт–Сб</small><b>15 000 ₽</b></div>
+          </div>
+          <div class="tags"><span>до 10 гостей</span><span>большой барн</span><span>фурако 6 000 ₽</span><span class="pet-no">без животных</span></div>
+          <a href="https://bronirui.online/marivill" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" onclick="openGallery('Большой барн Шале')">Смотреть фото</button>
+        </div>
+      </article>
+    
+    </div>
+  </div>
+</section>
+
+<section id="extras" class="extras-section section-pad">
+  <div class="container">
+    <div class="section-title center">
+      <span>Дополнительные услуги</span>
+      <h2>Дополнительные услуги для особенного отдыха</h2>
+      <p>Эти услуги можно добавить к вашему отдыху, чтобы сделать поездку ещё более запоминающейся: для романтического вечера, праздника или ярких эмоций на территории Маривилл.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-img clickable-photo" onclick="openGallery('Романтика')" style="background-image:url('assets/Романтика/00.jpg')"></div>
+        <div class="service-info">
+          <h3>Романтика</h3>
+          <p class="service-lead">Украшение дома в романтическом или праздничном стиле. Подходит для любых поводов: дня рождения, годовщины, предложения, важных семейных дат и просто особенного вечера.</p>
+          <div class="service-option">
+            <strong>Стоимость — 3 000 ₽</strong>
+            Оформление создаёт атмосферу уюта и праздника прямо в выбранном доме.
+          </div>
+          <button class="gallery-btn service-gallery-btn" type="button" onclick="openGallery('Романтика')">Смотреть фото оформления</button>
+        </div>
+      </article>
+      <article class="service-card">
+        <div class="service-img clickable-photo" onclick="openGallery('Украшение фурако')" style="background-image:url('assets/Украшение_фурако/00.jpg')"></div>
+        <div class="service-info">
+          <h3>Украшение фурако</h3>
+          <p class="service-lead">Для фурако можно выбрать один из нескольких вариантов оформления — от ароматной запарки с травами и апельсином до украшения розами и лепестками.</p>
+          <div class="service-pricing">
+            <div class="service-option">
+              <strong>1 вариант — 1 800 ₽</strong>
+              Украшение с запаркой: 5 трав (мята, донник, шалфей, тысячелистник, чабрец), ветки пихты и апельсина.
+            </div>
+            <div class="service-option">
+              <strong>2 вариант — 4 500 ₽</strong>
+              Украшение из цельных роз и лепестков.
+            </div>
+            <div class="service-option">
+              <strong>3 вариант — 700 ₽</strong>
+              Только лепестки роз.
+            </div>
+          </div>
+          <p class="service-note">К любому варианту можно добавить водные свечи: 6 штук — 300 ₽.</p>
+          <button class="gallery-btn service-gallery-btn" type="button" onclick="openGallery('Украшение фурако')">Смотреть фото украшения</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="bathhouse" class="services">
+  <div class="container">
+    <div class="section-title">
+      <span>Баня и фурако</span>
+      <h2>Баня и фурако на территории Маривилл</h2>
+      <p>Баня и фурако — одни из главных впечатлений отдыха в Маривилл. Ниже собрали основную информацию по стоимости и формату отдыха.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="service-img service-slider" data-gallery="Баня" data-index="0" style="background-image:url('assets/Баня/00.jpg')">
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="service-info">
+          <h3>Баня</h3>
+          <p><span class="text-highlight"><button class="gallery-btn service-gallery-btn" type="button" onclick="openGallery('Баня')">Смотреть фото бани</button><br><br>Стоимость бани — 2 000 ₽/час для гостей, которые бронируют дом</span>. Если гости приезжают только в баню без брони на дом, стоимость — <span class="text-highlight">2 500 ₽/час</span>. Минимальное время бронирования — от 2 часов.</p>
+        </div>
+      </article>
+      <article class="service-card">
+        <div class="service-img service-slider" data-gallery="Фурако" data-index="0" style="background-image:url('assets/Фурако/00.jpg')">
+          <button class="slide-btn slide-prev" type="button" aria-label="Предыдущее фото">‹</button>
+          <button class="slide-btn slide-next" type="button" aria-label="Следующее фото">›</button>
+          <div class="slide-hint">Двигайте курсором по фото</div>
+        </div>
+        <div class="service-info">
+          <h3>Фурако</h3>
+          <p>Фурако есть у каждого дома: <span class="text-highlight">5 000 ₽ без ограничения по времени</span>. В доме «Шале» — <span class="text-highlight">6 000 ₽</span>, так как купель больше.</p>
+          <p class="service-note">Дополнительно можно заказать украшение фурако: запарка с травами, пихтой и апельсином — <strong>1 800 ₽</strong>, цельные розы и лепестки — <strong>4 500 ₽</strong>, только лепестки роз — <strong>700 ₽</strong>, водные свечи — <strong>300 ₽</strong>.</p>
+          <button class="gallery-btn service-gallery-btn" type="button" onclick="openGallery('Фурако')">Смотреть фото фурако</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="prices">
+  <div class="container">
+    <div class="section-title center">
+      <span>Цены</span>
+      <h2>Цены и условия</h2>
+      <p>Итоговая стоимость зависит от выбранного дома, дня недели, количества гостей и дополнительных услуг.</p>
+    </div>
+    <div class="price-box">
+      <div class="price-card"><h3>Дополнительный гость</h3><div class="big">1 000 ₽</div><p>С ночёвкой сверх размещения на двоих.</p></div>
+      <div class="price-card"><h3>Гость без ночёвки</h3><div class="big">500 ₽</div><p>До 21:00. Дети до 12 лет — бесплатно.</p></div>
+      <div class="price-card"><h3>Скидки</h3><div class="big">10%</div><p>От 2 ночей, в день рождения и постоянным клиентам.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="container">
+    <div class="section-title center">
+      <span>Галерея</span>
+      <h2>Небольшая подборка фото Маривилл</h2>
+      <p>Несколько фотографий домов, бани, территории, пирса и отдыха у воды.</p>
+    </div>
+    <div class="gallery-grid">
+            <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/00.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/01.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/02.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/03.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/04.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/05.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/06.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/07.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/08.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/09.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/10.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/11.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/12.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/13.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/14.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/15.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/16.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/17.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/18.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/19.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/20.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/21.jpg')"></div>
+      <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/22.jpg')"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container map-grid">
+    <div>
+      <div class="section-title">
+        <span>Территория</span>
+        <h2>Схема территории</h2>
+        <p>Схема поможет гостям заранее понять расположение домов, бани, пирса и других объектов на территории.</p>
+      </div>
+    </div>
+    <div class="scheme-card"><img src="assets/Схема_территории_Маривилл.png" alt="Схема территории Маривилл"></div>
+  </div>
+</section>
+
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="section-title center">
+      <span>Частые вопросы</span>
+      <h2>Что важно знать перед бронированием</h2>
+      <p>Собрали основные вопросы, которые чаще всего возникают перед поездкой в Маривилл.</p>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>Во сколько заезд и выезд?</h3>
+        <p>Заезд в <strong>15:00</strong>, выезд в <strong>12:00</strong> следующего дня. Если вы хотите заселиться в дом пораньше либо выселиться попозже, нужно уточнить это у администратора.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Сколько гостей входит в стоимость?</h3>
+        <p>Стоимость дома указана за двух гостей. За каждого дополнительного гостя с ночёвкой доплата составляет <strong>1 000 ₽</strong>.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Можно ли приехать гостям без ночёвки?</h3>
+        <p>Да. Гость без ночёвки может находиться на территории до 21:00. Доплата — <strong>500 ₽</strong> за человека.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Дети оплачиваются отдельно?</h3>
+        <p>Дети до 12 лет размещаются бесплатно. Условия по размещению лучше уточнить заранее при бронировании дома.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Сколько стоит фурако?</h3>
+        <p>Фурако у каждого дома стоит <strong>5 000 ₽</strong> без ограничения по времени. В доме «Шале» — <strong>6 000 ₽</strong>, так как купель больше.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Сколько стоит баня?</h3>
+        <p>Баня стоит <strong>2 000 ₽/час</strong> для гостей, которые бронируют дом. Если гости приезжают только в баню без проживания в доме, стоимость — <strong>2 500 ₽/час</strong>. Минимальное время бронирования — от 2 часов.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Есть ли скидки?</h3>
+        <p>Да. При бронировании от 2 ночей действует скидка <strong>10%</strong>. Также есть скидки в день рождения и для постоянных гостей.</p>
+      </div>
+
+
+      <div class="faq-item">
+        <h3>Можно ли с домашними животными?</h3>
+        <p>С домашними животными можно в домах: <strong>Белый дом A-Frame</strong>, <strong>Дом рыбака</strong> и <strong>Дом охотника</strong>. Доплата за животное — <strong>1 000 ₽</strong>, для больших и пушистых собак — <strong>1 500 ₽</strong>. В остальных домах размещение с животными не предусмотрено.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Как забронировать дом?</h3>
+        <p>Можно перейти в <a class="inline-booking-link" href="https://bronirui.online/marivill" target="_blank">онлайн-бронирование</a>, выбрать свободные даты и подходящий дом либо написать нам в VK/Telegram.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="route" class="route-section">
+  <div class="container route-grid">
+    <div>
+      <div class="section-title">
+        <span>Как добраться</span>
+        <h2>Как добраться до гостевых домов Маривилл</h2>
+        <p>Гостевые дома находятся на территории Старая Пристань. Перед поездкой рекомендуем открыть маршрут в Яндекс.Картах и уточнить детали заезда при бронировании.</p>
+      </div>
+
+      <div class="route-card">
+        <h3>Адрес и ориентир</h3>
+        <p><strong>Республика Марий Эл, Звениговский район, Кокшамарское сельское поселение, территория Старая Пристань</strong></p>
+        <p>Адрес можно открыть в навигаторе и заранее построить маршрут до территории.</p>
+
+        <div class="route-actions">
+          <a class="btn btn-booking" href="https://yandex.ru/maps/-/CPT1qB8O" target="_blank">Открыть в Яндекс.Картах</a>
+          <a class="btn btn-vk" href="https://vk.com/maryvill12" target="_blank">Уточнить маршрут в VK</a>
+        </div>
+      </div>
+
+      <div class="route-tips">
+        <div><strong>Перед выездом</strong><p>Уточните время заезда и свободный дом.</p></div>
+        <div><strong>Навигатор</strong><p>Заранее постройте маршрут и сохраните его.</p></div>
+        <div><strong>Связь</strong><p>Если возникнут вопросы по дороге — напишите нам.</p></div>
+      </div>
+    </div>
+
+    <div class="map-embed" aria-label="Интерактивная карта Яндекс с точкой Маривилл">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=47.706420%2C56.136876&z=16&pt=47.706420%2C56.136876%2Cpm2rdm" width="100%" height="360" frameborder="0" allowfullscreen="true" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+
+<section id="contacts" class="contacts">
+  <div class="container">
+    <div class="section-title">
+      <span>Контакты</span>
+      <h2>Забронируйте отдых в Маривилл</h2>
+      <p>Выберите дом и даты в системе бронирования или напишите нам в VK, Telegram, WhatsApp или Instagram* — подскажем свободные даты и условия размещения.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Связаться</h3>
+        <p><b>VK:</b> vk.com/maryvill12</p>
+        <p><b>Телефон / Telegram / WhatsApp:</b> 8 960 309-49-83</p>
+        <div class="contact-actions">
+          <a class="btn btn-vk" href="https://vk.com/maryvill12" target="_blank">VK</a>
+          <a class="btn btn-tg" href="tel:89603094983">Telegram</a>
+          <a class="btn btn-wa" href="https://wa.me/79603094983" target="_blank">WhatsApp</a>
+          <a class="btn btn-instagram" href="https://www.instagram.com/maryvill12" target="_blank">Instagram*</a>
+        </div>
+        <span class="social-note">*Instagram принадлежит Meta, признанной экстремистской организацией и запрещённой в РФ.</span>
+      </div>
+      <div class="contact-card">
+        <h3>Онлайн-бронирование</h3>
+        <p>В системе бронирования можно посмотреть свободные даты, доступные дома и актуальную стоимость проживания.</p>
+        <div class="contact-actions">
+          <a class="btn btn-light btn-booking-light" href="https://bronirui.online/marivill" target="_blank">Проверить даты и цены</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="float-actions" aria-label="Быстрые ссылки связи">
+  <a class="vk" href="https://vk.com/maryvill12" target="_blank" title="VK">VK</a>
+  <a class="tg" href="tel:89603094983" title="Telegram">TG</a>
+  <a class="wa" href="https://wa.me/79603094983" target="_blank" title="WhatsApp">WA</a>
+  <a class="ig" href="https://www.instagram.com/maryvill12" target="_blank" title="Instagram*">IG</a>
+</div>
+
+<footer class="footer">
+  <div class="container">© Маривилл — гостевые дома у Волги</div>
+</footer>
+
+<div class="photo-modal" id="photoModal" onclick="modalBackdropClose(event)">
+  <div class="photo-modal-inner">
+    <div class="photo-modal-head">
+      <h3 id="photoModalTitle">Галерея</h3>
+      <div class="photo-modal-actions" onclick="event.stopPropagation()">
+        <span class="photo-zoom-help">Колесико — приблизить, двойной клик — быстро увеличить, зажмите фото и двигайте</span>
+        <button class="photo-modal-close" type="button" onclick="closeGallery()">×</button>
+      </div>
+    </div>
+    <div class="photo-modal-body">
+      <div class="photo-gallery-main" id="photoMain"><button class="modal-nav modal-prev" type="button" onclick="changeModalPhoto(-1)" aria-label="Предыдущее фото">‹</button><button class="modal-nav modal-next" type="button" onclick="changeModalPhoto(1)" aria-label="Следующее фото">›</button></div>
+      <div class="photo-gallery-thumbs" id="photoThumbs"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const houseGalleries = {"Белый дом A-Frame": ["assets/Белый_дом_A-Frame/00.jpg", "assets/Белый_дом_A-Frame/02.jpg", "assets/Белый_дом_A-Frame/04.jpg", "assets/Белый_дом_A-Frame/06.jpg", "assets/Белый_дом_A-Frame/08.jpg", "assets/Белый_дом_A-Frame/10.jpg", "assets/Белый_дом_A-Frame/12.jpg", "assets/Белый_дом_A-Frame/14.jpg", "assets/Белый_дом_A-Frame/16.jpg", "assets/Белый_дом_A-Frame/18.jpg", "assets/Белый_дом_A-Frame/20.jpg", "assets/Белый_дом_A-Frame/22.jpg", "assets/Белый_дом_A-Frame/24.jpg", "assets/Белый_дом_A-Frame/26.jpg", "assets/Белый_дом_A-Frame/28.jpg", "assets/Белый_дом_A-Frame/30.jpg", "assets/Белый_дом_A-Frame/32.jpg", "assets/Белый_дом_A-Frame/34.jpg", "assets/Белый_дом_A-Frame/36.jpg", "assets/Белый_дом_A-Frame/38.jpg", "assets/Белый_дом_A-Frame/40.jpg", "assets/Белый_дом_A-Frame/42.jpg"], "Дом рыбака": ["assets/Дом_рыбака/00.jpg", "assets/Дом_рыбака/02.jpg", "assets/Дом_рыбака/04.jpg", "assets/Дом_рыбака/06.jpg", "assets/Дом_рыбака/08.jpg", "assets/Дом_рыбака/10.jpg", "assets/Дом_рыбака/12.jpg", "assets/Дом_рыбака/14.jpg", "assets/Дом_рыбака/16.jpg", "assets/Дом_рыбака/18.jpg", "assets/Дом_рыбака/20.jpg", "assets/Дом_рыбака/22.jpg", "assets/Дом_рыбака/24.jpg", "assets/Дом_рыбака/26.jpg"], "Дом охотника": ["assets/Дом_охотника/00.jpg", "assets/Дом_охотника/02.jpg", "assets/Дом_охотника/04.jpg", "assets/Дом_охотника/06.jpg", "assets/Дом_охотника/08.jpg", "assets/Дом_охотника/10.jpg", "assets/Дом_охотника/12.jpg", "assets/Дом_охотника/14.jpg", "assets/Дом_охотника/16.jpg", "assets/Дом_охотника/18.jpg", "assets/Дом_охотника/20.jpg", "assets/Дом_охотника/22.jpg"], "Барнхаус Альпийский": ["assets/Барнхаус_Альпийский/00.jpg", "assets/Барнхаус_Альпийский/02.jpg", "assets/Барнхаус_Альпийский/04.jpg", "assets/Барнхаус_Альпийский/06.jpg", "assets/Барнхаус_Альпийский/08.jpg", "assets/Барнхаус_Альпийский/10.jpg", "assets/Барнхаус_Альпийский/12.jpg", "assets/Барнхаус_Альпийский/14.jpg", "assets/Барнхаус_Альпийский/16.jpg", "assets/Барнхаус_Альпийский/18.jpg"], "Барнхаус Лагуна": ["assets/Барнхаус_Лагуна/00.jpg", "assets/Барнхаус_Лагуна/02.jpg", "assets/Барнхаус_Лагуна/04.jpg", "assets/Барнхаус_Лагуна/06.jpg", "assets/Барнхаус_Лагуна/08.jpg", "assets/Барнхаус_Лагуна/10.jpg", "assets/Барнхаус_Лагуна/12.jpg", "assets/Барнхаус_Лагуна/14.jpg", "assets/Барнхаус_Лагуна/16.jpg", "assets/Барнхаус_Лагуна/18.jpg", "assets/Барнхаус_Лагуна/20.jpg", "assets/Барнхаус_Лагуна/22.jpg"], "Большой барн Изба": ["assets/Большой_барн_Изба/00.jpeg", "assets/Большой_барн_Изба/02.jpg", "assets/Большой_барн_Изба/04.jpg", "assets/Большой_барн_Изба/06.jpg", "assets/Большой_барн_Изба/08.jpg", "assets/Большой_барн_Изба/10.jpg", "assets/Большой_барн_Изба/12.jpg", "assets/Большой_барн_Изба/14.jpg", "assets/Большой_барн_Изба/16.jpg", "assets/Большой_барн_Изба/18.jpg", "assets/Большой_барн_Изба/20.jpg", "assets/Большой_барн_Изба/22.jpg", "assets/Большой_барн_Изба/24.jpg", "assets/Большой_барн_Изба/26.jpg", "assets/Большой_барн_Изба/28.jpg", "assets/Большой_барн_Изба/30.jpg", "assets/Большой_барн_Изба/32.jpg", "assets/Большой_барн_Изба/34.jpg", "assets/Большой_барн_Изба/36.jpg"], "Большой барн Шале": ["assets/Большой_барн_Шале/00.jpg", "assets/Большой_барн_Шале/02.jpg", "assets/Большой_барн_Шале/04.jpg", "assets/Большой_барн_Шале/06.jpg", "assets/Большой_барн_Шале/08.jpg", "assets/Большой_барн_Шале/10.jpg", "assets/Большой_барн_Шале/12.jpg", "assets/Большой_барн_Шале/14.jpg", "assets/Большой_барн_Шале/16.jpg", "assets/Большой_барн_Шале/18.jpg"], "Баня": ["assets/Баня/00.jpg", "assets/Баня/02.jpg", "assets/Баня/04.jpg", "assets/Баня/06.jpg", "assets/Баня/08.jpg", "assets/Баня/10.jpg", "assets/Баня/12.jpg", "assets/Баня/14.jpg", "assets/Баня/16.jpg", "assets/Баня/18.jpg", "assets/Баня/20.jpg", "assets/Баня/22.jpg", "assets/Баня/24.jpg", "assets/Баня/26.jpg"]};
+
+
+
+Object.assign(houseGalleries, {
+  "Романтика": [
+    "assets/Романтика/00.jpg",
+    "assets/Романтика/01.jpg",
+    "assets/Романтика/02.jpg",
+    "assets/Романтика/03.jpg",
+    "assets/Романтика/04.jpg"
+  ],
+  "Украшение фурако": [
+    "assets/Украшение_фурако/00.jpg",
+    "assets/Украшение_фурако/01.jpg",
+    "assets/Украшение_фурако/02.jpg",
+    "assets/Украшение_фурако/03.jpg",
+    "assets/Украшение_фурако/04.jpg"
+  ],
+  "Фурако": [
+    "assets/Фурако/00.jpg",
+    "assets/Фурако/01.jpg",
+    "assets/Фурако/02.jpg",
+    "assets/Фурако/03.jpg",
+    "assets/Фурако/04.jpg",
+    "assets/Фурако/05.jpg",
+    "assets/Фурако/06.jpg",
+    "assets/Фурако/07.jpg",
+    "assets/Фурако/08.jpg"
+  ]
+});
+
+const galleryCollection = [
+  "assets/Небольшая_галерея/00.jpg",
+  "assets/Небольшая_галерея/01.jpg",
+  "assets/Небольшая_галерея/02.jpg",
+  "assets/Небольшая_галерея/03.jpg",
+  "assets/Небольшая_галерея/04.jpg",
+  "assets/Небольшая_галерея/05.jpg",
+  "assets/Небольшая_галерея/06.jpg",
+  "assets/Небольшая_галерея/07.jpg",
+  "assets/Небольшая_галерея/08.jpg",
+  "assets/Небольшая_галерея/09.jpg",
+  "assets/Небольшая_галерея/10.jpg",
+  "assets/Небольшая_галерея/11.jpg",
+  "assets/Небольшая_галерея/12.jpg",
+  "assets/Небольшая_галерея/13.jpg",
+  "assets/Небольшая_галерея/14.jpg",
+  "assets/Небольшая_галерея/15.jpg",
+  "assets/Небольшая_галерея/16.jpg",
+  "assets/Небольшая_галерея/17.jpg",
+  "assets/Небольшая_галерея/18.jpg",
+  "assets/Небольшая_галерея/19.jpg",
+  "assets/Небольшая_галерея/20.jpg",
+  "assets/Небольшая_галерея/21.jpg",
+  "assets/Небольшая_галерея/22.jpg"
+];
+houseGalleries["Небольшая подборка фото Маривилл"] = galleryCollection;
+
+let currentModalImages = [];
+let currentModalIndex = 0;
+let modalZoom = 1;
+let modalPos = { x: 50, y: 50 };
+let isDraggingPhoto = false;
+let dragStart = { x: 0, y: 0, posX: 50, posY: 50 };
+let pinchStartDistance = 0;
+let pinchStartZoom = 1;
+const activePointers = new Map();
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function applyPhotoZoom() {
+  const main = document.getElementById('photoMain');
+  if (!main) return;
+  const size = modalZoom === 1 ? 'contain' : `${Math.round(modalZoom * 100)}%`;
+  main.style.backgroundSize = size;
+  main.style.backgroundPosition = `${modalPos.x}% ${modalPos.y}%`;
+  main.classList.toggle('is-zoomed', modalZoom > 1);
+}
+
+function setPhotoZoom(nextZoom, anchorX = 50, anchorY = 50) {
+  const previousZoom = modalZoom;
+  modalZoom = clamp(Math.round(nextZoom * 100) / 100, 1, 4);
+
+  if (modalZoom === 1) {
+    modalPos = { x: 50, y: 50 };
+  } else if (previousZoom === 1) {
+    modalPos = { x: anchorX, y: anchorY };
+  } else {
+    modalPos.x = clamp(modalPos.x, 0, 100);
+    modalPos.y = clamp(modalPos.y, 0, 100);
+  }
+  applyPhotoZoom();
+}
+
+function resetPhotoZoom() {
+  modalZoom = 1;
+  modalPos = { x: 50, y: 50 };
+  activePointers.clear();
+  applyPhotoZoom();
+}
+
+function getPointerPercent(event, element) {
+  const rect = element.getBoundingClientRect();
+  return {
+    x: clamp(((event.clientX - rect.left) / rect.width) * 100, 0, 100),
+    y: clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100)
+  };
+}
+
+function setModalPhoto(index) {
+  const main = document.getElementById('photoMain');
+  const thumbs = document.getElementById('photoThumbs');
+  if (!currentModalImages.length) return;
+  currentModalIndex = (index + currentModalImages.length) % currentModalImages.length;
+  const src = currentModalImages[currentModalIndex];
+  main.classList.add('is-switching');
+  window.setTimeout(() => {
+    main.style.backgroundImage = `url('${src}')`;
+    applyPhotoZoom();
+    main.classList.remove('is-switching');
+  }, 90);
+  thumbs.querySelectorAll('button').forEach((btn, i) => {
+    btn.classList.toggle('active', i === currentModalIndex);
+    if (i === currentModalIndex) btn.scrollIntoView({block:'nearest', inline:'nearest'});
+  });
+}
+
+function changeModalPhoto(direction) {
+  setModalPhoto(currentModalIndex + direction);
+}
+
+const photoMain = document.getElementById('photoMain');
+
+photoMain.addEventListener('wheel', function(event) {
+  if (!document.getElementById('photoModal').classList.contains('active')) return;
+  event.preventDefault();
+  const point = getPointerPercent(event, photoMain);
+  const direction = event.deltaY < 0 ? 1 : -1;
+  setPhotoZoom(modalZoom + direction * 0.18, point.x, point.y);
+}, { passive: false });
+
+photoMain.addEventListener('dblclick', function(event) {
+  if (event.target.closest('.modal-nav')) return;
+  const point = getPointerPercent(event, photoMain);
+  setPhotoZoom(modalZoom === 1 ? 2.25 : 1, point.x, point.y);
+});
+
+photoMain.addEventListener('pointerdown', function(event) {
+  if (event.target.closest('.modal-nav')) return;
+  activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+  photoMain.setPointerCapture(event.pointerId);
+
+  if (activePointers.size === 2) {
+    const points = Array.from(activePointers.values());
+    pinchStartDistance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+    pinchStartZoom = modalZoom;
+    return;
+  }
+
+  if (modalZoom > 1) {
+    isDraggingPhoto = true;
+    dragStart = { x: event.clientX, y: event.clientY, posX: modalPos.x, posY: modalPos.y };
+    photoMain.classList.add('is-dragging');
+  }
+});
+
+photoMain.addEventListener('pointermove', function(event) {
+  if (!activePointers.has(event.pointerId)) return;
+  activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+  if (activePointers.size === 2 && pinchStartDistance) {
+    const points = Array.from(activePointers.values());
+    const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+    setPhotoZoom(pinchStartZoom * (distance / pinchStartDistance));
+    return;
+  }
+
+  if (!isDraggingPhoto || modalZoom <= 1) return;
+  const rect = photoMain.getBoundingClientRect();
+  const moveX = ((event.clientX - dragStart.x) / rect.width) * 100;
+  const moveY = ((event.clientY - dragStart.y) / rect.height) * 100;
+  modalPos.x = clamp(dragStart.posX - moveX, 0, 100);
+  modalPos.y = clamp(dragStart.posY - moveY, 0, 100);
+  applyPhotoZoom();
+});
+
+function finishPhotoPointer(event) {
+  activePointers.delete(event.pointerId);
+  if (activePointers.size < 2) pinchStartDistance = 0;
+  isDraggingPhoto = false;
+  photoMain.classList.remove('is-dragging');
+}
+
+photoMain.addEventListener('pointerup', finishPhotoPointer);
+photoMain.addEventListener('pointercancel', finishPhotoPointer);
+photoMain.addEventListener('pointerleave', finishPhotoPointer);
+
+
+function openGallery(name, startIndex = 0) {
+  const images = houseGalleries[name] || [];
+  const modal = document.getElementById('photoModal');
+  const title = document.getElementById('photoModalTitle');
+  const main = document.getElementById('photoMain');
+  const thumbs = document.getElementById('photoThumbs');
+
+  title.textContent = name;
+  thumbs.innerHTML = '';
+  currentModalImages = images;
+  currentModalIndex = Math.max(0, Math.min(startIndex, images.length - 1));
+  resetPhotoZoom();
+
+  if (!images.length) {
+    main.style.backgroundImage = 'none';
+    thumbs.innerHTML = '<p style="padding:14px;color:#647067;">Фотографии пока не добавлены.</p>';
+  } else {
+    images.forEach((src, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.style.backgroundImage = `url('${src}')`;
+      btn.addEventListener('click', () => setModalPhoto(index));
+      thumbs.appendChild(btn);
+    });
+    setModalPhoto(currentModalIndex);
+  }
+
+  modal.classList.add('active');
+  document.body.classList.add('modal-open');
+}
+
+function closeGallery() {
+  document.getElementById('photoModal').classList.remove('active');
+  document.body.classList.remove('modal-open');
+}
+
+function modalBackdropClose(event) {
+  if (event.target.id === 'photoModal') closeGallery();
+}
+
+function getPreviewImages(slider) {
+  const images = houseGalleries[slider.dataset.gallery] || [];
+  if (images.length <= 8) return images;
+  const result = [];
+  for (let i = 0; i < 8; i++) {
+    result.push(images[Math.round(i * (images.length - 1) / 7)]);
+  }
+  return result;
+}
+
+function ensureFadeLayer(slider) {
+  let layer = slider.querySelector('.slider-fade-layer');
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.className = 'slider-fade-layer';
+    slider.prepend(layer);
+  }
+  return layer;
+}
+
+function setPreviewImage(slider, index, usePreviewSet = false) {
+  const images = usePreviewSet ? getPreviewImages(slider) : (houseGalleries[slider.dataset.gallery] || []);
+  if (!images.length) return;
+  const safeIndex = (index + images.length) % images.length;
+  if (String(safeIndex) === slider.dataset.previewIndex && usePreviewSet) return;
+  if (String(safeIndex) === slider.dataset.index && !usePreviewSet) return;
+
+  const src = images[safeIndex];
+  slider.dataset.currentSrc = src;
+  const layer = ensureFadeLayer(slider);
+  layer.style.backgroundImage = `url('${src}')`;
+  layer.classList.add('visible');
+  slider.classList.add('is-changing');
+
+  window.clearTimeout(slider._fadeTimer);
+  slider._fadeTimer = window.setTimeout(() => {
+    slider.style.backgroundImage = `url('${src}')`;
+    layer.classList.remove('visible');
+    slider.classList.remove('is-changing');
+  }, 430);
+
+  if (usePreviewSet) slider.dataset.previewIndex = String(safeIndex);
+  else slider.dataset.index = String(safeIndex);
+}
+
+function movePreview(slider, direction) {
+  const images = houseGalleries[slider.dataset.gallery] || [];
+  if (!images.length) return;
+  let index = Number(slider.dataset.index || 0);
+  index = (index + direction + images.length) % images.length;
+  setPreviewImage(slider, index, false);
+}
+
+document.querySelectorAll('.house-slider, .service-slider').forEach(slider => {
+  ensureFadeLayer(slider);
+  const initialImages = houseGalleries[slider.dataset.gallery] || [];
+  if (initialImages.length) slider.dataset.currentSrc = initialImages[Number(slider.dataset.index || 0)] || initialImages[0];
+  const prev = slider.querySelector('.slide-prev');
+  const next = slider.querySelector('.slide-next');
+  if (prev) prev.addEventListener('click', e => { e.stopPropagation(); movePreview(slider, -1); });
+  if (next) next.addEventListener('click', e => { e.stopPropagation(); movePreview(slider, 1); });
+
+  slider.addEventListener('click', e => {
+    if (e.target.closest('.slide-btn')) return;
+    const name = slider.dataset.gallery;
+    const images = houseGalleries[name] || [];
+    const currentSrc = slider.dataset.currentSrc || '';
+    const startIndex = Math.max(0, images.findIndex(src => src === currentSrc));
+    openGallery(name, startIndex);
+  });
+
+  slider.addEventListener('mousemove', e => {
+    const images = getPreviewImages(slider);
+    if (images.length <= 1) return;
+    const now = Date.now();
+    if (slider._lastHoverChange && now - slider._lastHoverChange < 260) return;
+    const rect = slider.getBoundingClientRect();
+    const x = Math.min(Math.max(e.clientX - rect.left, 0), rect.width);
+    const index = Math.min(Math.floor((x / rect.width) * images.length), images.length - 1);
+    if (String(index) !== slider.dataset.previewIndex) {
+      slider._lastHoverChange = now;
+      setPreviewImage(slider, index, true);
+    }
+  });
+});
+
+document.querySelectorAll('.gallery-grid .gallery-item').forEach((item, index) => {
+  item.addEventListener('click', () => openGallery('Небольшая подборка фото Маривилл', index));
+});
+
+
+const aboutPhotoImages = [
+  "assets/Белый_дом_A-Frame/00.jpg",
+  "assets/Дом_рыбака/00.jpg",
+  "assets/Дом_охотника/00.jpg",
+  "assets/Барнхаус_Альпийский/00.jpg",
+  "assets/Барнхаус_Лагуна/00.jpg",
+  "assets/Большой_барн_Изба/00.jpeg",
+  "assets/Большой_барн_Шале/00.jpg",
+  "assets/Баня/00.jpg",
+  "assets/Фурако/00.jpg"
+];
+(function rotateAboutPhoto(){
+  const el = document.querySelector('.about-photo');
+  if (!el || !aboutPhotoImages.length) return;
+  const first = document.createElement('div');
+  const second = document.createElement('div');
+  first.className = 'about-photo-layer active';
+  second.className = 'about-photo-layer';
+  first.style.backgroundImage = `url('${aboutPhotoImages[0]}')`;
+  second.style.backgroundImage = `url('${aboutPhotoImages[1] || aboutPhotoImages[0]}')`;
+  el.prepend(second);
+  el.prepend(first);
+  let index = 0;
+  let active = first;
+  let inactive = second;
+  window.setInterval(() => {
+    index = (index + 1) % aboutPhotoImages.length;
+    inactive.style.backgroundImage = `url('${aboutPhotoImages[index]}')`;
+    inactive.classList.add('active');
+    active.classList.remove('active');
+    const temp = active;
+    active = inactive;
+    inactive = temp;
+  }, 9000);
+})();
+
+document.addEventListener('keydown', function(event) {
+  const modalOpen = document.getElementById('photoModal').classList.contains('active');
+  if (event.key === 'Escape') closeGallery();
+  if (!modalOpen) return;
+  if (event.key === 'ArrowLeft') changeModalPhoto(-1);
+  if (event.key === 'ArrowRight') changeModalPhoto(1);
+});
+</script>
+
+</body>
+</html>
