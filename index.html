@@ -2369,6 +2369,153 @@ section,
     font-size: 16px !important;
   }
 }
+.photo-counter {
+  display: none;
+  color: var(--green);
+  font-weight: 900;
+  white-space: nowrap;
+}
+@media(max-width:720px), (pointer: coarse) and (max-width:900px) {
+  .photo-modal {
+    padding:
+      max(10px, env(safe-area-inset-top))
+      max(10px, env(safe-area-inset-right))
+      max(10px, env(safe-area-inset-bottom))
+      max(10px, env(safe-area-inset-left));
+    background: rgba(5, 12, 8, .94);
+    backdrop-filter: blur(5px);
+  }
+  .photo-modal.active {
+    display: block;
+  }
+  .photo-modal-inner {
+    width: 100%;
+    height: calc(100dvh - max(10px, env(safe-area-inset-top)) - max(10px, env(safe-area-inset-bottom)));
+    max-height: none;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    border-radius: 22px;
+    background: #07120d;
+    box-shadow: none;
+  }
+  .photo-modal-head {
+    min-height: 58px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    color: #fff;
+  }
+  .photo-modal-head h3 {
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.2;
+    max-width: min(58vw, 240px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .photo-modal-actions {
+    gap: 8px;
+  }
+  .photo-counter {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    color: #fff;
+    font-size: 13px;
+  }
+  .photo-zoom-help {
+    display: none !important;
+  }
+  .photo-modal-close {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    font-size: 28px;
+  }
+  .photo-modal-body {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 0;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .photo-gallery-main {
+    width: 100%;
+    height: auto !important;
+    min-height: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 18px;
+    background-color: #0a0f0c;
+    touch-action: pan-y pinch-zoom;
+  }
+  .photo-gallery-main::after {
+    content: "Свайпайте фото";
+    left: 50%;
+    right: auto;
+    bottom: 14px;
+    transform: translateX(-50%);
+    max-width: calc(100% - 28px);
+    color: rgba(255,255,255,.86);
+    background: rgba(0,0,0,.45);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .photo-gallery-main.is-zoomed {
+    touch-action: none;
+  }
+  .modal-nav {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    background: rgba(255,255,255,.16);
+    color: #fff;
+    font-size: 32px;
+    box-shadow: none;
+  }
+  .modal-prev {
+    left: 10px;
+  }
+  .modal-next {
+    right: 10px;
+  }
+  .photo-gallery-thumbs {
+    display: flex;
+    gap: 8px;
+    min-height: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 0 3px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .photo-gallery-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+  .photo-gallery-thumbs button {
+    flex: 0 0 62px;
+    width: 62px;
+    height: 56px;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+}
+@media(max-width:720px) and (max-height:700px) {
+  .photo-gallery-thumbs {
+    display: none;
+  }
+  .photo-modal-body {
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
 .house-extra {
   margin: 14px 0 14px;
   padding: 14px 15px;
@@ -2906,6 +3053,7 @@ section,
     <div class="photo-modal-head">
       <h3 id="photoModalTitle">Галерея</h3>
       <div class="photo-modal-actions" onclick="event.stopPropagation()">
+        <span class="photo-counter" id="photoCounter">1 / 1</span>
         <span class="photo-zoom-help">Колесико — приблизить, двойной клик — быстро увеличить, зажмите фото и двигайте</span>
         <button class="photo-modal-close" type="button" onclick="closeGallery()">×</button>
       </div>
@@ -2984,6 +3132,8 @@ let modalZoom = 1;
 let modalPos = { x: 50, y: 50 };
 let isDraggingPhoto = false;
 let dragStart = { x: 0, y: 0, posX: 50, posY: 50 };
+let swipeStart = { x: 0, y: 0, time: 0 };
+let swipeMoved = false;
 let pinchStartDistance = 0;
 let pinchStartZoom = 1;
 const activePointers = new Map();
@@ -3034,9 +3184,11 @@ function getPointerPercent(event, element) {
 function setModalPhoto(index) {
   const main = document.getElementById('photoMain');
   const thumbs = document.getElementById('photoThumbs');
+  const counter = document.getElementById('photoCounter');
   if (!currentModalImages.length) return;
   currentModalIndex = (index + currentModalImages.length) % currentModalImages.length;
   const src = currentModalImages[currentModalIndex];
+  if (counter) counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
   main.classList.add('is-switching');
   window.setTimeout(() => {
     main.style.backgroundImage = `url('${src}')`;
@@ -3073,6 +3225,8 @@ photoMain.addEventListener('pointerdown', function(event) {
   if (event.target.closest('.modal-nav')) return;
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
   photoMain.setPointerCapture(event.pointerId);
+  swipeStart = { x: event.clientX, y: event.clientY, time: Date.now() };
+  swipeMoved = false;
 
   if (activePointers.size === 2) {
     const points = Array.from(activePointers.values());
@@ -3091,6 +3245,9 @@ photoMain.addEventListener('pointerdown', function(event) {
 photoMain.addEventListener('pointermove', function(event) {
   if (!activePointers.has(event.pointerId)) return;
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+  if (Math.abs(event.clientX - swipeStart.x) > 8 || Math.abs(event.clientY - swipeStart.y) > 8) {
+    swipeMoved = true;
+  }
 
   if (activePointers.size === 2 && pinchStartDistance) {
     const points = Array.from(activePointers.values());
@@ -3109,6 +3266,19 @@ photoMain.addEventListener('pointermove', function(event) {
 });
 
 function finishPhotoPointer(event) {
+  const dx = event.clientX - swipeStart.x;
+  const dy = event.clientY - swipeStart.y;
+  const elapsed = Date.now() - swipeStart.time;
+  if (
+    activePointers.size === 1 &&
+    modalZoom === 1 &&
+    swipeMoved &&
+    Math.abs(dx) > 54 &&
+    Math.abs(dx) > Math.abs(dy) * 1.35 &&
+    elapsed < 700
+  ) {
+    changeModalPhoto(dx < 0 ? 1 : -1);
+  }
   activePointers.delete(event.pointerId);
   if (activePointers.size < 2) pinchStartDistance = 0;
   isDraggingPhoto = false;
