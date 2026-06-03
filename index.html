@@ -431,6 +431,11 @@ section { padding:90px 0; }
   grid-template-columns:repeat(4,1fr);
   gap:14px;
 }
+.gallery-open-all {
+  display: none;
+  margin: 24px auto 0;
+  width: fit-content;
+}
 .gallery-item {
   height:260px;
   border-radius:24px;
@@ -2456,36 +2461,14 @@ section,
     touch-action: pan-y pinch-zoom;
   }
   .photo-gallery-main::after {
-    content: "Свайпайте фото";
-    left: 50%;
-    right: auto;
-    bottom: 14px;
-    transform: translateX(-50%);
-    max-width: calc(100% - 28px);
-    color: rgba(255,255,255,.86);
-    background: rgba(0,0,0,.45);
-    border-radius: 999px;
-    padding: 8px 12px;
-    font-size: 12px;
-    white-space: nowrap;
+    content: none !important;
+    display: none !important;
   }
   .photo-gallery-main.is-zoomed {
     touch-action: none;
   }
   .modal-nav {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    background: rgba(255,255,255,.16);
-    color: #fff;
-    font-size: 32px;
-    box-shadow: none;
-  }
-  .modal-prev {
-    left: 10px;
-  }
-  .modal-next {
-    right: 10px;
+    display: none !important;
   }
   .photo-gallery-thumbs {
     display: flex;
@@ -2506,6 +2489,12 @@ section,
     height: 56px;
     border-radius: 12px;
     border-width: 2px;
+  }
+  .gallery-grid .gallery-item:nth-child(n+7) {
+    display: none;
+  }
+  .gallery-open-all {
+    display: flex !important;
   }
 }
 @media(max-width:720px) and (max-height:700px) {
@@ -2892,6 +2881,7 @@ section,
       <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/21.jpg')"></div>
       <div class="gallery-item" style="background-image:url('assets/Небольшая_галерея/22.jpg')"></div>
     </div>
+    <button class="btn gallery-open-all" type="button" onclick="openGallery('Небольшая подборка фото Маривилл')">Открыть всю галерею</button>
   </div>
 </section>
 
