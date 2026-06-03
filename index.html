@@ -212,7 +212,7 @@ section { padding:90px 0; }
 .about-photo {
   min-height:520px;
   border-radius:32px;
-  background:url('assets/Белый_дом_A-Frame/00.jpg') center/cover;
+  background:url('assets/Небольшая_галерея/00.jpg') center/cover;
   box-shadow:var(--shadow);
 }
 .features {
@@ -1980,6 +1980,27 @@ body.modal-open {
   font-size: clamp(12px, .9vw, 13px) !important;
   white-space: nowrap;
 }
+.mobile-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(242,213,139,.38);
+  border-radius: 13px;
+  background: rgba(255,255,255,.08);
+  color: #f7efd8;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+.mobile-menu-toggle span {
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor;
+}
 @media(max-width:1180px) {
   .header-inner {
     flex-wrap: wrap !important;
@@ -1990,14 +2011,12 @@ body.modal-open {
     flex: 0 0 auto;
   }
   .header .btn-booking {
-    order: 2;
-    margin-left: auto;
-    display: inline-flex !important;
+    display: none !important;
   }
   .nav {
-    order: 3;
-    flex: 1 0 100%;
-    width: 100%;
+    order: 2;
+    flex: 1 1 auto;
+    width: auto;
     display: flex !important;
     overflow-x: auto;
     overflow-y: hidden;
@@ -2007,11 +2026,112 @@ body.modal-open {
   .nav::-webkit-scrollbar { display: none; }
 }
 @media(max-width:560px) {
+  .header-inner {
+    border-radius: 22px;
+    flex-wrap: nowrap !important;
+  }
+  .header.is-menu-open .header-inner {
+    flex-wrap: wrap !important;
+  }
+  .mobile-menu-toggle {
+    display: inline-flex;
+    order: 2;
+    margin-left: auto;
+  }
+  .nav {
+    display: none !important;
+    order: 4;
+    flex: 1 0 100%;
+    width: 100%;
+    overflow: visible;
+    padding-top: 6px;
+  }
+  .header.is-menu-open .nav {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    order: 3;
+    flex: 1 0 100%;
+    width: 100%;
+  }
+  .header.is-menu-open .nav a {
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 13px;
+    background: rgba(255,255,255,.08);
+  }
   .header .btn-booking {
-    padding: 8px 10px !important;
-    font-size: 12px !important;
+    display: none !important;
   }
   .logo span { font-size: 18px; }
+  .house-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px;
+  }
+  .house-card {
+    border-radius: 22px;
+  }
+  .house-photo,
+  .house-slider {
+    height: 132px !important;
+    min-height: 132px !important;
+  }
+  .house-photo span {
+    left: 9px;
+    top: 9px;
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .house-info {
+    padding: 12px;
+  }
+  .house-info h3 {
+    font-size: 16px;
+    line-height: 1.15;
+    margin-bottom: 7px;
+  }
+  .house-info > p,
+  .house-extra,
+  .tags {
+    display: none;
+  }
+  .house-meta {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin: 8px 0;
+  }
+  .house-meta span,
+  .house-prices div,
+  .house-card .tag {
+    font-size: 11px;
+  }
+  .house-prices {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    margin: 8px 0;
+  }
+  .house-prices div {
+    padding: 9px;
+    border-radius: 14px;
+  }
+  .house-prices strong {
+    font-size: 15px;
+  }
+  .house-info > .text-link,
+  .house-info > .gallery-btn {
+    display: flex;
+    width: 100%;
+    min-height: 36px;
+    margin-top: 8px;
+    padding: 9px 8px;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  .slide-btn,
+  .slide-hint {
+    display: none;
+  }
 }
 .house-extra {
   margin: 14px 0 14px;
@@ -2050,7 +2170,8 @@ body.modal-open {
 <header class="header">
   <div class="container header-inner">
     <a class="logo" href="#"><img src="assets/logo.png" alt="Маривилл"><span>Маривилл</span></a>
-    <nav class="nav">
+    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav"><span aria-hidden="true"></span>Меню</button>
+    <nav class="nav" id="siteNav">
       <a href="#about">О нас</a>
       <a href="#houses">Домики</a>
       <a href="#extras">Доп. услуги</a>
@@ -2888,18 +3009,23 @@ document.querySelectorAll('.gallery-grid .gallery-item').forEach((item, index) =
   item.addEventListener('click', () => openGallery('Небольшая подборка фото Маривилл', index));
 });
 
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const siteHeader = document.querySelector('.header');
+if (mobileMenuToggle && siteHeader) {
+  mobileMenuToggle.addEventListener('click', () => {
+    const isOpen = siteHeader.classList.toggle('is-menu-open');
+    mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  document.querySelectorAll('#siteNav a').forEach(link => {
+    link.addEventListener('click', () => {
+      siteHeader.classList.remove('is-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
-const aboutPhotoImages = [
-  "assets/Белый_дом_A-Frame/00.jpg",
-  "assets/Дом_рыбака/00.jpg",
-  "assets/Дом_охотника/00.jpg",
-  "assets/Барнхаус_Альпийский/00.jpg",
-  "assets/Барнхаус_Лагуна/00.jpg",
-  "assets/Большой_барн_Изба/00.jpeg",
-  "assets/Большой_барн_Шале/00.jpg",
-  "assets/Баня/00.jpg",
-  "assets/Фурако/00.jpg"
-];
+
+const aboutPhotoImages = galleryCollection;
 (function rotateAboutPhoto(){
   const el = document.querySelector('.about-photo');
   if (!el || !aboutPhotoImages.length) return;
