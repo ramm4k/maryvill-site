@@ -2458,7 +2458,11 @@ section,
     border: 0;
     border-radius: 18px;
     background-color: #0a0f0c;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-y;
+    overscroll-behavior: contain;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
   }
   .photo-gallery-main::after {
     content: none !important;
@@ -2548,7 +2552,7 @@ section,
       <a href="#houses">Домики</a>
       <a href="#extras">Доп. услуги</a>
       <a href="#bathhouse">Баня и фурако</a>
-      <a href="#prices">Цены</a>
+      <a href="#prices">Доп. условия</a>
       <a href="#faq">FAQ</a>
       <a href="#route">Как добраться</a>
       <a href="#contacts">Контакты</a>
@@ -2837,8 +2841,8 @@ section,
 <section id="prices">
   <div class="container">
     <div class="section-title center">
-      <span>Цены</span>
-      <h2>Цены и условия</h2>
+      <span>Дополнительные условия</span>
+      <h2>Дополнительные условия</h2>
       <p>Итоговая стоимость зависит от выбранного дома, дня недели, количества гостей и дополнительных услуг.</p>
     </div>
     <div class="price-box">
@@ -3123,6 +3127,10 @@ let isDraggingPhoto = false;
 let dragStart = { x: 0, y: 0, posX: 50, posY: 50 };
 let swipeStart = { x: 0, y: 0, time: 0 };
 let swipeMoved = false;
+let touchSwipeStart = { x: 0, y: 0, time: 0 };
+let touchSwipeMoved = false;
+let touchSwipeDirection = null;
+let lastPhotoSwipeAt = 0;
 let pinchStartDistance = 0;
 let pinchStartZoom = 1;
 const activePointers = new Map();
@@ -3196,6 +3204,22 @@ function changeModalPhoto(direction) {
 
 const photoMain = document.getElementById('photoMain');
 
+function isPhotoSwipe(dx, dy, elapsed) {
+  return (
+    modalZoom === 1 &&
+    Math.abs(dx) > 42 &&
+    Math.abs(dx) > Math.abs(dy) * 1.2 &&
+    elapsed < 900
+  );
+}
+
+function triggerPhotoSwipe(direction) {
+  const now = Date.now();
+  if (now - lastPhotoSwipeAt < 320) return;
+  lastPhotoSwipeAt = now;
+  changeModalPhoto(direction);
+}
+
 photoMain.addEventListener('wheel', function(event) {
   if (!document.getElementById('photoModal').classList.contains('active')) return;
   event.preventDefault();
@@ -3234,8 +3258,13 @@ photoMain.addEventListener('pointerdown', function(event) {
 photoMain.addEventListener('pointermove', function(event) {
   if (!activePointers.has(event.pointerId)) return;
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-  if (Math.abs(event.clientX - swipeStart.x) > 8 || Math.abs(event.clientY - swipeStart.y) > 8) {
+  const dx = event.clientX - swipeStart.x;
+  const dy = event.clientY - swipeStart.y;
+  if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
     swipeMoved = true;
+  }
+  if (modalZoom === 1 && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+    event.preventDefault();
   }
 
   if (activePointers.size === 2 && pinchStartDistance) {
@@ -3260,13 +3289,10 @@ function finishPhotoPointer(event) {
   const elapsed = Date.now() - swipeStart.time;
   if (
     activePointers.size === 1 &&
-    modalZoom === 1 &&
     swipeMoved &&
-    Math.abs(dx) > 54 &&
-    Math.abs(dx) > Math.abs(dy) * 1.35 &&
-    elapsed < 700
+    isPhotoSwipe(dx, dy, elapsed)
   ) {
-    changeModalPhoto(dx < 0 ? 1 : -1);
+    triggerPhotoSwipe(dx < 0 ? 1 : -1);
   }
   activePointers.delete(event.pointerId);
   if (activePointers.size < 2) pinchStartDistance = 0;
@@ -3277,6 +3303,47 @@ function finishPhotoPointer(event) {
 photoMain.addEventListener('pointerup', finishPhotoPointer);
 photoMain.addEventListener('pointercancel', finishPhotoPointer);
 photoMain.addEventListener('pointerleave', finishPhotoPointer);
+
+photoMain.addEventListener('touchstart', function(event) {
+  if (!document.getElementById('photoModal').classList.contains('active')) return;
+  if (event.target.closest('.modal-nav') || event.touches.length !== 1) return;
+  const touch = event.touches[0];
+  touchSwipeStart = { x: touch.clientX, y: touch.clientY, time: Date.now() };
+  touchSwipeMoved = false;
+  touchSwipeDirection = null;
+}, { passive: true });
+
+photoMain.addEventListener('touchmove', function(event) {
+  if (!document.getElementById('photoModal').classList.contains('active')) return;
+  if (event.touches.length !== 1 || modalZoom > 1) return;
+  const touch = event.touches[0];
+  const dx = touch.clientX - touchSwipeStart.x;
+  const dy = touch.clientY - touchSwipeStart.y;
+  if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
+    touchSwipeMoved = true;
+  }
+  if (!touchSwipeDirection && (Math.abs(dx) > 12 || Math.abs(dy) > 12)) {
+    touchSwipeDirection = Math.abs(dx) > Math.abs(dy) * 1.15 ? 'x' : 'y';
+  }
+  if (touchSwipeDirection === 'x') {
+    event.preventDefault();
+  }
+}, { passive: false });
+
+photoMain.addEventListener('touchend', function(event) {
+  if (!document.getElementById('photoModal').classList.contains('active')) return;
+  if (!touchSwipeMoved || modalZoom > 1 || event.changedTouches.length !== 1) return;
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - touchSwipeStart.x;
+  const dy = touch.clientY - touchSwipeStart.y;
+  const elapsed = Date.now() - touchSwipeStart.time;
+  if (isPhotoSwipe(dx, dy, elapsed)) {
+    event.preventDefault();
+    triggerPhotoSwipe(dx < 0 ? 1 : -1);
+  }
+  touchSwipeMoved = false;
+  touchSwipeDirection = null;
+}, { passive: false });
 
 
 function openGallery(name, startIndex = 0) {
