@@ -2357,6 +2357,53 @@ section,
   }
 }
 @media(max-width:390px) {
+  section {
+    padding: 58px 0;
+  }
+  .container {
+    width: calc(100% - 28px);
+  }
+  .section-title {
+    margin-bottom: 28px;
+  }
+  .section-title span {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+  }
+  .section-title h2 {
+    font-size: clamp(30px, 10vw, 38px);
+    line-height: 1.08;
+  }
+  .section-title p {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .faq-grid {
+    gap: 14px;
+  }
+  .faq-item {
+    padding: 22px 18px;
+    border-radius: 22px;
+  }
+  .faq-item h3 {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+  .faq-item p {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .float-actions {
+    right: 10px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    gap: 8px;
+  }
+  .float-actions a {
+    width: 42px;
+    height: 42px;
+    font-size: 11px;
+    box-shadow: 0 8px 18px rgba(31,42,36,.16);
+  }
   .header .btn-booking {
     width: 66px;
     max-width: 66px;
