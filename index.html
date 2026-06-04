@@ -2358,51 +2358,60 @@ section,
 }
 @media(max-width:390px) {
   section {
-    padding: 58px 0;
+    padding: 50px 0;
   }
   .container {
-    width: calc(100% - 28px);
+    width: calc(100% - 24px);
   }
   .section-title {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
   .section-title span {
-    font-size: 11px;
-    letter-spacing: 1.2px;
+    font-size: 10px;
+    letter-spacing: 1px;
   }
   .section-title h2 {
-    font-size: clamp(30px, 10vw, 38px);
-    line-height: 1.08;
+    font-size: clamp(28px, 8.6vw, 34px);
+    line-height: 1.12;
+    letter-spacing: -.4px;
   }
   .section-title p {
-    font-size: 18px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.5;
   }
   .faq-grid {
-    gap: 14px;
+    gap: 12px;
   }
   .faq-item {
-    padding: 22px 18px;
-    border-radius: 22px;
+    padding: 20px 16px;
+    border-radius: 20px;
   }
   .faq-item h3 {
-    font-size: 24px;
-    line-height: 1.25;
+    font-size: 20px;
+    line-height: 1.28;
   }
   .faq-item p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.55;
   }
   .float-actions {
-    right: 10px;
-    bottom: max(16px, env(safe-area-inset-bottom));
-    gap: 8px;
+    left: 50%;
+    right: auto;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 7px;
+    padding: 7px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.78);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 26px rgba(31,42,36,.16);
   }
   .float-actions a {
-    width: 42px;
-    height: 42px;
-    font-size: 11px;
-    box-shadow: 0 8px 18px rgba(31,42,36,.16);
+    width: 38px;
+    height: 38px;
+    font-size: 10px;
+    box-shadow: none;
   }
   .header .btn-booking {
     width: 66px;
@@ -2510,6 +2519,11 @@ section,
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
+    will-change: transform;
+    transition: transform .22s ease, opacity .22s ease;
+  }
+  .photo-gallery-main.is-touching {
+    transition: none;
   }
   .photo-gallery-main::after {
     content: none !important;
@@ -3177,6 +3191,7 @@ let swipeMoved = false;
 let touchSwipeStart = { x: 0, y: 0, time: 0 };
 let touchSwipeMoved = false;
 let touchSwipeDirection = null;
+let touchSwipeDelta = { x: 0, y: 0 };
 let lastPhotoSwipeAt = 0;
 let pinchStartDistance = 0;
 let pinchStartZoom = 1;
@@ -3265,6 +3280,22 @@ function triggerPhotoSwipe(direction) {
   if (now - lastPhotoSwipeAt < 320) return;
   lastPhotoSwipeAt = now;
   changeModalPhoto(direction);
+}
+
+function setPhotoTouchOffset(dx = 0, dy = 0) {
+  if (!photoMain || modalZoom > 1) return;
+  const x = clamp(dx, -90, 90);
+  const y = clamp(dy, -70, 90);
+  const opacity = dy > 0 ? clamp(1 - (dy / 360), .72, 1) : 1;
+  photoMain.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  photoMain.style.opacity = opacity;
+}
+
+function resetPhotoTouchOffset() {
+  if (!photoMain) return;
+  photoMain.style.transform = '';
+  photoMain.style.opacity = '';
+  photoMain.classList.remove('is-touching');
 }
 
 photoMain.addEventListener('wheel', function(event) {
@@ -3358,6 +3389,8 @@ photoMain.addEventListener('touchstart', function(event) {
   touchSwipeStart = { x: touch.clientX, y: touch.clientY, time: Date.now() };
   touchSwipeMoved = false;
   touchSwipeDirection = null;
+  touchSwipeDelta = { x: 0, y: 0 };
+  photoMain.classList.add('is-touching');
 }, { passive: true });
 
 photoMain.addEventListener('touchmove', function(event) {
@@ -3366,6 +3399,7 @@ photoMain.addEventListener('touchmove', function(event) {
   const touch = event.touches[0];
   const dx = touch.clientX - touchSwipeStart.x;
   const dy = touch.clientY - touchSwipeStart.y;
+  touchSwipeDelta = { x: dx, y: dy };
   if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
     touchSwipeMoved = true;
   }
@@ -3374,12 +3408,19 @@ photoMain.addEventListener('touchmove', function(event) {
   }
   if (touchSwipeDirection === 'x') {
     event.preventDefault();
+    setPhotoTouchOffset(dx * .42, 0);
+  } else if (touchSwipeDirection === 'y' && dy > 0) {
+    event.preventDefault();
+    setPhotoTouchOffset(0, dy * .45);
   }
 }, { passive: false });
 
 photoMain.addEventListener('touchend', function(event) {
   if (!document.getElementById('photoModal').classList.contains('active')) return;
-  if (!touchSwipeMoved || modalZoom > 1 || event.changedTouches.length !== 1) return;
+  if (!touchSwipeMoved || modalZoom > 1 || event.changedTouches.length !== 1) {
+    resetPhotoTouchOffset();
+    return;
+  }
   const touch = event.changedTouches[0];
   const dx = touch.clientX - touchSwipeStart.x;
   const dy = touch.clientY - touchSwipeStart.y;
@@ -3387,10 +3428,27 @@ photoMain.addEventListener('touchend', function(event) {
   if (isPhotoSwipe(dx, dy, elapsed)) {
     event.preventDefault();
     triggerPhotoSwipe(dx < 0 ? 1 : -1);
+  } else if (
+    touchSwipeDirection === 'y' &&
+    dy > 78 &&
+    dy > Math.abs(dx) * 1.4 &&
+    elapsed < 900
+  ) {
+    event.preventDefault();
+    closeGallery();
   }
+  resetPhotoTouchOffset();
   touchSwipeMoved = false;
   touchSwipeDirection = null;
+  touchSwipeDelta = { x: 0, y: 0 };
 }, { passive: false });
+
+photoMain.addEventListener('touchcancel', function() {
+  resetPhotoTouchOffset();
+  touchSwipeMoved = false;
+  touchSwipeDirection = null;
+  touchSwipeDelta = { x: 0, y: 0 };
+}, { passive: true });
 
 
 function openGallery(name, startIndex = 0) {
