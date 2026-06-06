@@ -3691,6 +3691,39 @@ let pinchStartDistance = 0;
 let pinchStartZoom = 1;
 const activePointers = new Map();
 
+function trackAnalytics(eventName, params = {}) {
+  if (typeof gtag === 'function') {
+    gtag('event', eventName, params);
+  }
+  if (typeof ym === 'function') {
+    ym(109655399, 'reachGoal', eventName, params);
+  }
+}
+
+function getAnalyticsContext(element) {
+  const houseCard = element.closest('.house-card');
+  if (houseCard) {
+    return houseCard.querySelector('h3')?.textContent?.trim() || '';
+  }
+  const mobileDetail = element.closest('.house-mobile-detail');
+  if (mobileDetail) {
+    return mobileDetail.querySelector('h3')?.textContent?.trim() || '';
+  }
+  const serviceCard = element.closest('.service-card');
+  if (serviceCard) {
+    return serviceCard.querySelector('h3')?.textContent?.trim() || '';
+  }
+  const routeCard = element.closest('.route-card');
+  if (routeCard) {
+    return routeCard.querySelector('h3')?.textContent?.trim() || 'Как добраться';
+  }
+  const contactCard = element.closest('.contact-card');
+  if (contactCard) {
+    return contactCard.querySelector('h3')?.textContent?.trim() || 'Контакты';
+  }
+  return '';
+}
+
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
@@ -3972,6 +4005,10 @@ function openGallery(name, startIndex = 0) {
     setModalPhoto(currentModalIndex);
   }
 
+  trackAnalytics('open_gallery', {
+    gallery_name: name,
+    photo_count: images.length
+  });
   modal.classList.add('active');
   document.body.classList.add('modal-open');
 }
@@ -4197,6 +4234,9 @@ function renderMobileHouseShowcase() {
     if (nextIndex === activeHouseIndex) return;
     activeHouseIndex = nextIndex;
     activePhotoIndex = 0;
+    trackAnalytics('select_house_mobile', {
+      house_name: houses[activeHouseIndex]?.name || ''
+    });
     renderRail();
     renderDetail();
     const activeTab = rail.querySelector(`.house-mobile-tab[data-house-index="${activeHouseIndex}"]`);
@@ -4205,6 +4245,46 @@ function renderMobileHouseShowcase() {
 }
 
 renderMobileHouseShowcase();
+
+document.addEventListener('click', (event) => {
+  const actionLink = event.target.closest('a[href]');
+  if (actionLink) {
+    const href = actionLink.getAttribute('href') || '';
+    const context = getAnalyticsContext(actionLink);
+
+    if (href.includes('bronirui.online/marivill')) {
+      trackAnalytics('click_booking', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    } else if (href.includes('vk.com/maryvill12')) {
+      trackAnalytics('click_vk', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    } else if (href.includes('wa.me/79603094983')) {
+      trackAnalytics('click_whatsapp', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    } else if (href === 'tel:89603094983') {
+      trackAnalytics('click_phone_or_telegram', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    } else if (href.includes('instagram.com/mary_vill12')) {
+      trackAnalytics('click_instagram', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    } else if (href.includes('yandex.ru/maps/?ll=47.706415')) {
+      trackAnalytics('click_yandex_map', {
+        link_text: actionLink.textContent.trim(),
+        context
+      });
+    }
+  }
+});
 
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const siteHeader = document.querySelector('.header');
