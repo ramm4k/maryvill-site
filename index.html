@@ -383,6 +383,196 @@ section { padding:90px 0; }
   color:var(--brown);
   font-weight:900;
 }
+.house-mobile-showcase {
+  display:none;
+}
+.house-mobile-rail {
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:6px 2px 10px;
+  margin-bottom:18px;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+.house-mobile-rail::-webkit-scrollbar {
+  display:none;
+}
+.house-mobile-tab {
+  flex:0 0 220px;
+  border:1px solid rgba(31,42,36,.08);
+  background:rgba(255,255,255,.88);
+  border-radius:24px;
+  padding:10px;
+  text-align:left;
+  box-shadow:var(--shadow-soft);
+  cursor:pointer;
+  scroll-snap-align:start;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+}
+.house-mobile-tab.is-active {
+  border-color:rgba(154,106,53,.32);
+  box-shadow:0 16px 32px rgba(20,35,26,.12);
+  transform:translateY(-2px);
+}
+.house-mobile-tab-photo {
+  position:relative;
+  height:132px;
+  border-radius:18px;
+  background:center/cover;
+  overflow:hidden;
+}
+.house-mobile-tab-photo::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.38));
+}
+.house-mobile-tab-capacity {
+  position:absolute;
+  left:10px;
+  top:10px;
+  z-index:1;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.92);
+  color:var(--green);
+  font-size:12px;
+  font-weight:900;
+}
+.house-mobile-tab-body {
+  padding:12px 6px 4px;
+}
+.house-mobile-tab-title {
+  display:block;
+  color:var(--green);
+  font-size:18px;
+  line-height:1.18;
+  margin-bottom:5px;
+}
+.house-mobile-tab-text {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.45;
+}
+.house-mobile-detail {
+  background:#fff;
+  border-radius:30px;
+  overflow:hidden;
+  border:1px solid rgba(31,42,36,.06);
+  box-shadow:var(--shadow);
+}
+.house-mobile-detail-photo {
+  position:relative;
+  height:320px;
+  background:center/cover;
+}
+.house-mobile-detail-photo::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.35));
+}
+.house-mobile-detail-capacity {
+  position:absolute;
+  left:16px;
+  top:16px;
+  z-index:1;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.94);
+  color:var(--green);
+  font-size:13px;
+  font-weight:900;
+}
+.house-mobile-detail-controls {
+  position:absolute;
+  right:14px;
+  bottom:14px;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.house-mobile-detail-nav {
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.92);
+  color:var(--green);
+  font-size:24px;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(20,35,26,.14);
+}
+.house-mobile-detail-counter {
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(23,56,39,.82);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+}
+.house-mobile-detail-body {
+  padding:24px;
+}
+.house-mobile-detail-head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:12px;
+}
+.house-mobile-detail-head h3 {
+  color:var(--green);
+  font-size:30px;
+  line-height:1.1;
+}
+.house-mobile-detail-lead,
+.house-mobile-detail-extra {
+  color:var(--muted);
+}
+.house-mobile-detail-lead {
+  font-size:17px;
+  line-height:1.55;
+  margin-bottom:12px;
+}
+.house-mobile-detail-extra {
+  font-size:15px;
+  line-height:1.6;
+}
+.house-mobile-detail-extra strong {
+  color:var(--green);
+}
+.house-mobile-detail-extra .house-meta {
+  margin-top:14px;
+}
+.house-mobile-detail-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0 0;
+}
+.house-mobile-detail-actions {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:18px;
+}
+.house-mobile-detail-actions .gallery-btn,
+.house-mobile-detail-actions .text-link {
+  width:100%;
+  justify-content:center;
+  min-height:48px;
+  margin:0;
+  border-radius:16px;
+}
+.house-mobile-detail-actions .text-link {
+  padding:12px 16px;
+  border:1px solid rgba(154,106,53,.18);
+  background:var(--brown-soft);
+}
 
 /* Services */
 .services {
@@ -966,6 +1156,30 @@ section { padding:90px 0; }
   #houses .house-card:nth-child(2n),
   #houses .house-card:nth-child(2n):hover {
     transform: none;
+  }
+  .house-grid {
+    display:none !important;
+  }
+  .house-mobile-showcase {
+    display:block;
+  }
+  .house-mobile-detail {
+    border-radius:26px;
+  }
+  .house-mobile-detail-photo {
+    height:300px;
+  }
+  .house-mobile-detail-body {
+    padding:20px;
+  }
+  .house-mobile-detail-head h3 {
+    font-size:26px;
+  }
+  .house-mobile-detail-lead {
+    font-size:16px;
+  }
+  .house-mobile-detail-extra {
+    font-size:14px;
   }
 }
 
@@ -2530,6 +2744,70 @@ section,
   .tags span {
     padding: 5px 8px;
   }
+  .house-mobile-rail {
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 4px;
+  }
+  .house-mobile-tab {
+    flex-basis: 190px;
+    border-radius: 20px;
+    padding: 8px;
+  }
+  .house-mobile-tab-photo {
+    height: 118px;
+    border-radius: 16px;
+  }
+  .house-mobile-tab-title {
+    font-size: 16px;
+  }
+  .house-mobile-tab-text {
+    font-size: 12px;
+  }
+  .house-mobile-detail {
+    border-radius: 22px;
+  }
+  .house-mobile-detail-photo {
+    height: 250px;
+  }
+  .house-mobile-detail-capacity {
+    left: 12px;
+    top: 12px;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  .house-mobile-detail-controls {
+    right: 10px;
+    bottom: 10px;
+    gap: 6px;
+  }
+  .house-mobile-detail-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 21px;
+  }
+  .house-mobile-detail-counter {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  .house-mobile-detail-body {
+    padding: 16px 14px;
+  }
+  .house-mobile-detail-head {
+    margin-bottom: 8px;
+  }
+  .house-mobile-detail-head h3 {
+    font-size: 22px;
+  }
+  .house-mobile-detail-lead,
+  .house-mobile-detail-extra {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .house-mobile-detail-actions {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .price-card {
     padding: 20px 16px 18px;
   }
@@ -2855,6 +3133,7 @@ section,
       <h2>Дома для отдыха</h2>
       <p>Цены указаны за двоих гостей. <span class="text-highlight">Дополнительный гость с ночёвкой — 1 000 ₽</span>, <span class="text-highlight">гость без ночёвки до 21:00 — 500 ₽</span>. <span class="text-highlight">Дети до 12 лет размещаются бесплатно</span>.</p>
     </div>
+    <div class="house-mobile-showcase" id="houseMobileShowcase" aria-label="Выбор дома для мобильной и планшетной версии"></div>
     <div class="house-grid">
       
       <article class="house-card">
@@ -3772,6 +4051,135 @@ document.querySelectorAll('.house-slider, .service-slider').forEach(slider => {
 document.querySelectorAll('.gallery-grid .gallery-item').forEach((item, index) => {
   item.addEventListener('click', () => openGallery('Небольшая подборка фото Маривилл', index));
 });
+
+function collectHouseCards() {
+  return Array.from(document.querySelectorAll('#houses .house-card')).map((card, index) => {
+    const slider = card.querySelector('.house-slider');
+    const name = slider?.dataset.gallery || card.querySelector('h3')?.textContent?.trim() || `Дом ${index + 1}`;
+    const images = houseGalleries[name] || [];
+    const fallbackImage = slider?.style.backgroundImage?.replace(/^url\(["']?/, '').replace(/["']?\)$/, '') || '';
+    return {
+      id: `house-${index}`,
+      name,
+      capacity: card.querySelector('.house-photo span')?.textContent?.trim() || '',
+      lead: card.querySelector('.house-info > p')?.textContent?.trim() || '',
+      extraHTML: card.querySelector('.house-extra')?.innerHTML || '',
+      pricesHTML: card.querySelector('.house-prices')?.innerHTML || '',
+      tagsHTML: card.querySelector('.tags')?.innerHTML || '',
+      bookingHref: card.querySelector('.booking-link')?.getAttribute('href') || 'https://bronirui.online/marivill',
+      images,
+      firstImage: images[0] || fallbackImage
+    };
+  });
+}
+
+function renderMobileHouseShowcase() {
+  const mount = document.getElementById('houseMobileShowcase');
+  if (!mount) return;
+
+  const houses = collectHouseCards();
+  if (!houses.length) {
+    mount.innerHTML = '';
+    return;
+  }
+
+  mount.innerHTML = `
+    <div class="house-mobile-rail" role="tablist" aria-label="Лента выбора домов"></div>
+    <div class="house-mobile-detail" aria-live="polite"></div>
+  `;
+
+  const rail = mount.querySelector('.house-mobile-rail');
+  const detail = mount.querySelector('.house-mobile-detail');
+  let activeHouseIndex = 0;
+  let activePhotoIndex = 0;
+
+  function renderRail() {
+    rail.innerHTML = houses.map((house, index) => `
+      <button
+        class="house-mobile-tab${index === activeHouseIndex ? ' is-active' : ''}"
+        type="button"
+        role="tab"
+        aria-selected="${index === activeHouseIndex ? 'true' : 'false'}"
+        data-house-index="${index}"
+      >
+        <div class="house-mobile-tab-photo" style="background-image:url('${house.firstImage}')">
+          <span class="house-mobile-tab-capacity">${house.capacity}</span>
+        </div>
+        <div class="house-mobile-tab-body">
+          <strong class="house-mobile-tab-title">${house.name}</strong>
+          <div class="house-mobile-tab-text">${house.lead}</div>
+        </div>
+      </button>
+    `).join('');
+  }
+
+  function renderDetail() {
+    const house = houses[activeHouseIndex];
+    const images = house.images.length ? house.images : [house.firstImage];
+    activePhotoIndex = ((activePhotoIndex % images.length) + images.length) % images.length;
+    const currentImage = images[activePhotoIndex];
+    detail.innerHTML = `
+      <div class="house-mobile-detail-photo" style="background-image:url('${currentImage}')">
+        <span class="house-mobile-detail-capacity">${house.capacity}</span>
+        <div class="house-mobile-detail-controls">
+          <button class="house-mobile-detail-nav" type="button" data-photo-shift="-1" aria-label="Предыдущее фото">‹</button>
+          <span class="house-mobile-detail-counter">${activePhotoIndex + 1} / ${images.length}</span>
+          <button class="house-mobile-detail-nav" type="button" data-photo-shift="1" aria-label="Следующее фото">›</button>
+        </div>
+      </div>
+      <div class="house-mobile-detail-body">
+        <div class="house-mobile-detail-head">
+          <h3>${house.name}</h3>
+        </div>
+        <p class="house-mobile-detail-lead">${house.lead}</p>
+        <div class="house-mobile-detail-extra">${house.extraHTML}</div>
+        <div class="house-prices">${house.pricesHTML}</div>
+        <div class="tags house-mobile-detail-tags">${house.tagsHTML}</div>
+        <div class="house-mobile-detail-actions">
+          <a href="${house.bookingHref}" target="_blank" class="text-link booking-link">Забронировать →</a>
+          <button class="gallery-btn" type="button" data-open-gallery="${house.name}">Смотреть фото</button>
+        </div>
+      </div>
+    `;
+
+    const photo = detail.querySelector('.house-mobile-detail-photo');
+    if (photo) {
+      photo.addEventListener('click', (event) => {
+        if (event.target.closest('.house-mobile-detail-nav')) return;
+        openGallery(house.name, activePhotoIndex);
+      });
+    }
+    detail.querySelectorAll('[data-photo-shift]').forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        activePhotoIndex += Number(button.dataset.photoShift || 0);
+        renderDetail();
+      });
+    });
+    const galleryButton = detail.querySelector('[data-open-gallery]');
+    if (galleryButton) {
+      galleryButton.addEventListener('click', () => openGallery(house.name, activePhotoIndex));
+    }
+  }
+
+  renderRail();
+  renderDetail();
+
+  rail.addEventListener('click', (event) => {
+    const button = event.target.closest('.house-mobile-tab');
+    if (!button) return;
+    const nextIndex = Number(button.dataset.houseIndex || 0);
+    if (nextIndex === activeHouseIndex) return;
+    activeHouseIndex = nextIndex;
+    activePhotoIndex = 0;
+    renderRail();
+    renderDetail();
+    const activeTab = rail.querySelector(`.house-mobile-tab[data-house-index="${activeHouseIndex}"]`);
+    if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  });
+}
+
+renderMobileHouseShowcase();
 
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const siteHeader = document.querySelector('.header');
