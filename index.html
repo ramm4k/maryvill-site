@@ -2149,8 +2149,26 @@ body.modal-open {
     line-height: 1.15;
     margin-bottom: 7px;
   }
-  .house-info > p,
-  .house-extra,
+  .house-info > p {
+    display: -webkit-box;
+    min-height: 0;
+    margin-bottom: 8px;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .house-extra {
+    display: block;
+    margin: 8px 0 10px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .house-extra strong {
+    display: inline;
+  }
+  .house-extra .house-meta {
+    margin-top: 8px;
+  }
   .tags {
     display: none;
   }
@@ -2477,6 +2495,18 @@ section,
   .house-extra {
     font-size: 14px;
     line-height: 1.5;
+  }
+  .house-info > p,
+  .house-extra {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+  }
+  .house-info > p {
+    -webkit-line-clamp: 3;
+  }
+  .house-extra {
+    -webkit-line-clamp: 4;
   }
   .house-prices {
     gap: 8px;
