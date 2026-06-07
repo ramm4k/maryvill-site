@@ -268,6 +268,7 @@ section { padding:90px 0; }
   border-radius:32px;
   background:url('assets/Небольшая_галерея/00.jpg') center/cover;
   box-shadow:var(--shadow);
+  cursor: pointer;
 }
 .features {
   display:grid;
@@ -1282,6 +1283,18 @@ section { padding:90px 0; }
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   gap: 10px;
 }
+.photo-gallery-footer {
+  display: none;
+  justify-content: center;
+  margin-top: 16px;
+}
+.photo-gallery-footer.is-visible {
+  display: flex;
+}
+.photo-gallery-footer .btn {
+  width: 100%;
+  max-width: 360px;
+}
 .photo-gallery-thumbs button {
   height: 86px;
   border: 2px solid transparent;
@@ -1314,6 +1327,9 @@ body.modal-open {
   }
   .photo-gallery-thumbs button {
     height: 68px;
+  }
+  .photo-gallery-footer {
+    margin-top: 12px;
   }
 }
 
@@ -3609,6 +3625,9 @@ section,
     <div class="photo-modal-body">
       <div class="photo-gallery-main" id="photoMain"><button class="modal-nav modal-prev" type="button" onclick="changeModalPhoto(-1)" aria-label="Предыдущее фото">‹</button><button class="modal-nav modal-next" type="button" onclick="changeModalPhoto(1)" aria-label="Следующее фото">›</button></div>
       <div class="photo-gallery-thumbs" id="photoThumbs"></div>
+      <div class="photo-gallery-footer" id="photoGalleryFooter">
+        <a class="btn btn-vk" id="photoGalleryVkLink" href="https://vk.com/albums-219399946" target="_blank" rel="noopener noreferrer">Смотреть полный альбом в VK</a>
+      </div>
     </div>
   </div>
 </div>
@@ -3676,6 +3695,7 @@ houseGalleries["Схема территории Маривилл"] = ["assets/С
 
 let currentModalImages = [];
 let currentModalIndex = 0;
+let currentModalGalleryName = '';
 let modalZoom = 1;
 let modalPos = { x: 50, y: 50 };
 let isDraggingPhoto = false;
@@ -3771,10 +3791,17 @@ function setModalPhoto(index) {
   const main = document.getElementById('photoMain');
   const thumbs = document.getElementById('photoThumbs');
   const counter = document.getElementById('photoCounter');
+  const footer = document.getElementById('photoGalleryFooter');
   if (!currentModalImages.length) return;
   currentModalIndex = (index + currentModalImages.length) % currentModalImages.length;
   const src = currentModalImages[currentModalIndex];
   if (counter) counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
+  if (footer) {
+    const shouldShowVkAlbum =
+      currentModalGalleryName === 'Небольшая подборка фото Маривилл' &&
+      currentModalIndex === currentModalImages.length - 1;
+    footer.classList.toggle('is-visible', shouldShowVkAlbum);
+  }
   main.classList.add('is-switching');
   window.setTimeout(() => {
     main.style.backgroundImage = `url('${src}')`;
@@ -3984,11 +4011,14 @@ function openGallery(name, startIndex = 0) {
   const title = document.getElementById('photoModalTitle');
   const main = document.getElementById('photoMain');
   const thumbs = document.getElementById('photoThumbs');
+  const footer = document.getElementById('photoGalleryFooter');
 
   title.textContent = name;
   thumbs.innerHTML = '';
   currentModalImages = images;
+  currentModalGalleryName = name;
   currentModalIndex = Math.max(0, Math.min(startIndex, images.length - 1));
+  if (footer) footer.classList.remove('is-visible');
   resetPhotoZoom();
 
   if (!images.length) {
@@ -4016,6 +4046,7 @@ function openGallery(name, startIndex = 0) {
 function closeGallery() {
   document.getElementById('photoModal').classList.remove('active');
   document.body.classList.remove('modal-open');
+  currentModalGalleryName = '';
 }
 
 function modalBackdropClose(event) {
@@ -4317,6 +4348,10 @@ const aboutPhotoImages = galleryCollection;
   let index = 0;
   let active = first;
   let inactive = second;
+  el.addEventListener('click', () => {
+    const randomIndex = Math.floor(Math.random() * aboutPhotoImages.length);
+    openGallery('Небольшая подборка фото Маривилл', randomIndex);
+  });
   window.setInterval(() => {
     index = (index + 1) % aboutPhotoImages.length;
     inactive.style.backgroundImage = `url('${aboutPhotoImages[index]}')`;
