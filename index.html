@@ -3791,17 +3791,10 @@ function setModalPhoto(index) {
   const main = document.getElementById('photoMain');
   const thumbs = document.getElementById('photoThumbs');
   const counter = document.getElementById('photoCounter');
-  const footer = document.getElementById('photoGalleryFooter');
   if (!currentModalImages.length) return;
   currentModalIndex = (index + currentModalImages.length) % currentModalImages.length;
   const src = currentModalImages[currentModalIndex];
   if (counter) counter.textContent = `${currentModalIndex + 1} / ${currentModalImages.length}`;
-  if (footer) {
-    const shouldShowVkAlbum =
-      currentModalGalleryName === 'Небольшая подборка фото Маривилл' &&
-      currentModalIndex === currentModalImages.length - 1;
-    footer.classList.toggle('is-visible', shouldShowVkAlbum);
-  }
   main.classList.add('is-switching');
   window.setTimeout(() => {
     main.style.backgroundImage = `url('${src}')`;
@@ -4018,7 +4011,9 @@ function openGallery(name, startIndex = 0) {
   currentModalImages = images;
   currentModalGalleryName = name;
   currentModalIndex = Math.max(0, Math.min(startIndex, images.length - 1));
-  if (footer) footer.classList.remove('is-visible');
+  if (footer) {
+    footer.classList.toggle('is-visible', name === 'Небольшая подборка фото Маривилл');
+  }
   resetPhotoZoom();
 
   if (!images.length) {
