@@ -3115,9 +3115,10 @@ section,
 }
 .hero-content { padding-bottom: 28px !important; }
 .hero-booking {
+  --booking-width: 1100px; /* <-- ШИРИНА ПЛАШКИ НА ПК: меняйте это число */
   position: relative;
   z-index: 3;
-  width: min(820px, 92%);
+  width: min(var(--booking-width), 92%);
   margin: 0 auto 8px;
   padding: 12px;
   border-radius: 22px;
