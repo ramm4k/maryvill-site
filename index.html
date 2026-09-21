@@ -3122,32 +3122,36 @@ section,
 
 /* Booking module (Бронируй Онлайн) in hero */
 .hero {
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow-x: clip;
-  overflow-y: visible;
+position: relative;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding-bottom: 32px !important;
+overflow-x: clip;
+overflow-y: visible;
 }
+.hero-content { padding-bottom: 28px !important; }
 .hero-booking {
-  --booking-width: 1100px; 
-  position: relative;
-  z-index: 3;
-  width: min(var(--booking-width), 92%);
-  margin: 0 auto 8px;
-  border-radius: 22px;
-  background: rgba(251, 248, 243, 0.96);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
+--booking-width: 1100px;
+position: relative;
+z-index: 3;
+width: min(var(--booking-width), 92%);
+margin: 0 auto 8px;
+border-radius: 22px;
+background: rgba(251, 248, 243, 0.96);
+box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
 }
 #znms-widget-1 { width: 100%; }
 #znms-widget-1 > * { margin-left: auto; margin-right: auto; max-width: 100%; }
 
 #znms-widget-1 > * {
-  background: transparent !important; 
-  box-shadow: none !important;
+padding-top: 10px !important;    /* <-- отступ сверху внутри виджета */
+padding-bottom: 10px !important; /* <-- отступ снизу внутри виджета */
+background: transparent !important;
+box-shadow: none !important;
 }
 @media (max-width: 900px) {
-  .hero-booking { --booking-pad: 6px; border-radius: 18px; }
+.hero-booking { --booking-pad: 6px; border-radius: 18px; }
 }
 </style>
 </head>
